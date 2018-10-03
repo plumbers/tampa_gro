@@ -1,0 +1,165 @@
+// This is a manifest file that'll be compiled into application.js, which will include all the files
+// listed below.
+//
+// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
+// or vendor/assets/javascripts of plugins, if any, can be referenced here using a relative path.
+//
+// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
+// the compiled file.
+//
+// WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
+// GO AFTER THE REQUIRES BELOW.
+//
+// we dont use it now //= require introjs
+//= require jquery
+//= require bootstrap-sprockets
+//= require jquery_ujs
+//= require functioncallevent.js
+//= require browser_timezone_rails/application.js
+//= require hamlcoffee
+//= require_tree ../templates
+//= require bootbox.min.js
+//= require bootstrap3-typeahead.js
+//= require piechart_clusterer.js
+//= require math.uuid.js
+//= require paginate_table.js
+//= require table-fixed-header.js
+//= require cocoon
+//= require underscore
+//= require jquery-fileupload/basic
+// require backbone
+// require backbone-relational
+// require backbone-forms
+// require backbone_sync_hack
+//= require valkyrie
+// require_tree ./models
+// require_tree ./collections
+// require_tree ./views
+// require_tree ./routers
+//= require tokeninput.js
+//= require jrumble.min.js
+//= require fancybox
+//= require i18n/translations
+//= require Chart
+// require bootstrap-datepicker/core
+// require bootstrap-datepicker/locales/bootstrap-datepicker.ru.js
+//= require moment
+//= require moment/ru
+//= require bootstrap-datetimepicker
+//= require chosen-jquery
+//= require masked_input.js
+//= require date
+//= require date/ru-RU
+//= require locations_list.js.coffee
+//= require locations_list_my.js.coffee
+//= require custom_reports/locations_reports_matcher.js.coffee
+//= require custom_reports/locations_planograms_matcher.js.coffee
+//= require planogram_bundles/locations_planogram_bundles_matcher.js.coffee
+//= require jquery.serializejson.js
+//= require_tree .
+//= require jquery.highlight-5.js
+
+$.fn.datetimepicker.defaults.icons = {
+    time: 'icon-time',
+    date: 'icon-calendar',
+    up: 'icon-chevron-up',
+    down: 'icon-chevron-down',
+    previous: 'icon-angle-left',
+    next: 'icon-angle-right',
+    today: 'icon-circle',
+    clear: 'icon-trash',
+    close: 'icon-off'
+}
+
+$(document).ready(function(){
+
+    if($('.fading_in.flash_messages').length > 0){
+      setTimeout(function(){ $('.fading_in.flash_messages').fadeIn(); }, 200);
+    }
+
+    $("[rel='tooltip']").tooltip();
+    //$('input[type=text]').focus(); # NOTE: do we need it?
+    $('a[disabled=disabled]').click(function(event){
+        event.preventDefault();
+    });
+
+    $('.plan_item_refuses .plan_item_refuse_watched a.close').click(function(event){
+      var target = $(event.currentTarget);
+      var confirmation_block = target.parent();
+      var id = confirmation_block.data('id');
+      $.ajax({
+          method: 'POST',
+          data: {},
+          url: '/move_visit_confirmations/' + id + '/mark_refuse_as_read.json'
+      }).always(function(){
+          confirmation_block.remove()
+      });
+    });
+
+//    var typeaheadPrototype = $.fn.typeahead.Constructor.prototype;
+//    typeaheadPrototype.select = typeaheadPrototype.select.addCallListener( 'after', function( props ) {
+//          props.context.$element.trigger({ type: 'typeaheadselect' });
+//    });
+
+
+});
+
+// bootstrap typeahead patch (http://stackoverflow.com/a/15184593)
+//$.fn.typeahead.Constructor.prototype.render = function (items) {
+//
+//    var that = this;
+//
+//    items = $(items).map(function (i, item) {
+//        i = $(that.options.item).attr('data-value', item);
+//        i.find('a').html(that.highlighter(item));
+//        return i[0];
+//    });
+//
+//    this.$menu.html(items);
+//    return this;
+//};
+
+var set_proper_icon_for_placemark = function(placemark, image_name){
+
+    placemark.options.set('iconLayout', 'default#image');
+    placemark.options.set('iconImageHref', image_path("placemarks/" + image_name));
+    var icon_size = [36,37];
+    if(/multiple/.test(image_name)){
+      icon_size = [43,38];
+    }
+    placemark.options.set('iconImageSize', icon_size);
+}
+
+
+/**
+ * @see http://stackoverflow.com/q/7616461/940217
+ * @return {number}
+ */
+String.prototype.hashCode = function(){
+    if (Array.prototype.reduce){
+        return this.split("").reduce(function(a,b){a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);
+    }
+    var hash = 0;
+    if (this.length === 0) return hash;
+    for (var i = 0; i < this.length; i++) {
+        var character  = this.charCodeAt(i);
+        hash  = ((hash<<5)-hash)+character;
+        hash = hash & hash; // Convert to 32bit integer
+    }
+    return hash;
+}
+
+String.prototype.stripTags = function(){
+  return $("<div/>").html(this).text();
+}
+
+String.prototype.unescape = function(){
+  return _.unescape(this);
+}
+
+var popup_alert = function(text, type){
+  var alert_block = $('<div class="alert alert-' + type + '"></div>');
+  alert_block.append('<a class="close" data-dismiss="alert"> × </a>');
+  alert_block.append('<div>' + text + '</div>');
+  return alert_block;
+}
