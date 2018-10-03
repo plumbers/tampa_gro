@@ -1,6 +1,7 @@
 module WebApi
   class BaseController < ApplicationController
     before_action :authenticate_user!
+    before_action :options
     respond_to :json
 
     protected

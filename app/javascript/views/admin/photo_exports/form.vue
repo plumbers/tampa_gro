@@ -1,460 +1,328 @@
 <template lang="pug">
-  form#new_photo_export(method="POST", :url="formUrl")
+
+  form#new_photo_export(method="POST")
     div.btn-group-left
       div.row
         div.col-sm-4
-          div(class="form-group clearfix select required photo_export_filters_business_id")
-            multiselect#business_id(v-model="business.selected",
-              :options="business.options",
-              :searchable=false,
-              open-direction="bottom",
-              label="label",
-              track-by="value",
-              placeholder="Выберите бизнес")
-
-        div.col-sm-4
           div(class="form-group clearfix select required photo_export_filters_date_from")
-            date-picker#date_from(v-model="dateFrom", :config="dateFromConfig", placeholder='Начало периода')
+            v-date-picker(
+              v-model='selectedDate',
+              :input-props='{ class: "input", placeholder: "Период выгрузки", readonly: true }',
+              mode='range',
+              :formats='{ highlight: { backgroundColor: \'#ff8080\' } }',
+              show-caps,
+              :is-required="true",
+              @input='updateDateRange(selectedDate, { formatInput: true, hidePopover: false })',
+            )
+            // :theme-styles='themeStyles',
+            // :formats='DateRangeFormats',
+            // :attributes='DateRangeAttrs',
         div.col-sm-4
-          div(class="form-group clearfix select required photo_export_filters_date_till")
-            date-picker#date_till(v-model="dateTill", :config="dateTillConfig", placeholder="Конец периода")
+          businesses-select(
+            field = 'business',
+            placeholder = "Выберите бизнес",
+            :multiple = "false",
+            :close_on_select = "true",
+            :childComps="['chief','company','signboard','location_type','location_external','checkin_type','question']",
+          )
+        div.col-sm-4
+          chiefs-select(
+            field = 'chief',
+            placeholder = "Выберите пользователя",
+            :multiple = "false",
+            :close_on_select = "true",
+            :childComps="['company','signboard','location_type','location_external', 'checkin_type','question']",
+          )
 
+      div.row.col-sm-12.form-group
+        label.control-label(class="form-group") Атрибуты TT
 
-      div.row
-        div.col-sm-6
-          div(class="form-group clearfix string required photo_export_filters_limit")
-            input#limit(v-model="limit", placeholder="Кол-во", class="form-control string")
-
-        div.col-sm-6
-          div(class="form-group clearfix select required photo_export_filters_chief_id")
-            multiselect#chief_id(v-model="chief.selected",
-              :options="chief.options",
-              :disabled="chief.isDisabled",
-              :internal-search="false",
-              @search-change="getChiefs",
-              label="label",
-              track-by="value",
-              open-direction="bottom",
-              placeholder="Выберите пользователя"
+        div.row
+          div.col-sm-6
+            companies-select(
+              field = 'company',
+              placeholder = "Выберите компании",
+              :childComps="['signboard', 'location_type', 'location_external',  'checkin_type','question']",
             )
-              span(slot="noResult").
-                К сожалению ничего не найдено
-
-      div.row
-        div.col-sm-6
-          div(class="form-group clearfix select required photo_export_filters_company_ids")
-            multiselect#company_ids(v-model="company.selected",
-              label="label",
-              track-by="value",
-              open-direction="bottom",
-              placeholder="Выберите компании",
-              :multiple="true",
-              :hide-selected="true",
-              :disabled="company.isDisabled",
-              :options="company.options",
-              :internal-search="false",
-              :clear-on-select="false",
-              :close-on-select="false",
-              :loading="company.isLoading",
-              @search-change="getCompanies"
+          div.col-sm-6
+            signboards-select(
+              field = 'signboard',
+              placeholder = "Выберите вывески",
+              :childComps="['company', 'location_type', 'location_external',  'checkin_type','question']",
             )
-              template(slot="clear", slot-scope="props")
-                div.multiselect__clear(v-if="company.selected.length")
-              span(slot="noResult").
-                К сожалению ничего не найдено
 
-        div.col-sm-6
-          div(class="form-group clearfix select required photo_export_filters_signboard_ids")
-            multiselect#signboard_ids(v-model="signboard.selected",
-              label="label",
-              track-by="value",
-              open-direction="bottom",
-              placeholder="Выберите вывески",
-              :multiple="true",
-              :hide-selected="true",
-              :disabled="signboard.isDisabled",
-              :options="signboard.options",
-              :internal-search="false",
-              :clear-on-select="false",
-              :close-on-select="false",
-              @search-change="getSignboards",
+        div.row
+          div.col-sm-6
+            location-types-select(
+              field = 'location_type',
+              placeholder = "Выберите типы ТТ",
+              :childComps="['company','signboard', 'location_external', 'checkin_type','question']",
             )
-              span(slot="noResult").
-                К сожалению ничего не найдено
+          div.col-sm-6
+            location-ext-select(
+              field = 'location_external',
+              placeholder = "Выберите внешние ID ТТ",
+              :childComps="['company','signboard', 'location_type', 'checkin_type','question']",
+            )
 
       div.row
         div.col-sm-12
-          div(class="form-group clearfix select required photo_export_filters_checkin_type_ids")
-            multiselect#checkin_type_ids(v-model="checkin_type.selected",
-              label="label",
-              track-by="value",
-              open-direction="bottom",
-              placeholder="Выберите анкеты",
-              :multiple="true",
-              :hide-selected="true",
-              :disabled="checkin_type.isDisabled",
-              :options="checkin_type.options",
-              :internal-search="false",
-              :clear-on-select="false",
-              :close-on-select="false",
-              @search-change="getCheckinTypes",
-            )
-              span(slot="noResult").
-                К сожалению ничего не найдено
+          checkin-types-select(
+            field = 'checkin_type',
+            placeholder = "Выберите анкеты",
+            :childComps="['question']",
+          )
+
+      div.row
+        div.col-sm-12
+          questions-select(
+            field = 'question',
+            placeholder = "Выберите вопросы анкет",
+            :childComps="[]",
+          )
+
+      div.row
+        div.col-sm-12
+          multiselect(
+            v-model="subfolders.selected",
+            :options="subfolders.options",
+            placeholder = "Выберите подкаталоги архива",
+            :multiple="true",
+            :taggable="true",
+            :allow-empty="true",
+            :close-on-select="false",
+            :hide-selected="true",
+            open-direction="bottom",
+            :custom-label="nameWithoutId",
+            label="label",
+            track-by="label",
+            :preselect-first="false",
+            selectLabel="Выбрать",
+          )
+
+      div.row.col-sm-12.form-group
+        label.control-label(class="form-group") Атрибуты TT extra
+
+        div.row
+          div.col-sm-6(v-for="(filter, index) in extended_filters.filters", v-bind:key="index")
+            extrafilter-select(
+              :field = 'filter.field',
+              :placeholder="filter.label",
+              :childComps="[]",
+          )
 
       div.row
         div.col-sm-4
           div(class="form-group clearfix select required photo_export_process_at")
-            date-picker#process_at(v-model="processAt", :config="processAtConfig", placeholder="Время обработки")
+            datetime-picker#process_at(v-model="processAt", :config="processAtConfig", placeholder="Время обработки")
 
         div.col-sm-6
-          button.btn.btn-success#start_photo_export(v-on:click.prevent="sendForm", :class="sendDisabledClass") Сформировать выгрузку
+          button.btn.btn-success#start_photo_export(
+            v-on:dblclick.native=";",
+            v-on:click.prevent="sendForm",
+            :class="sendDisabledClass"
+          ) Сформировать выгрузку
           button.btn.btn-success#clear_form(v-on:click.prevent="clearForm") Очистить форму
+
       div.row
         div.col-sm-6
           span Приблизительное кол-во фото:&nbsp
-          img(v-if="loading", :src="Spinner")
-          span(v-else) {{ limit ? limit + ' из ' : '' }} {{ photoCount }}
+          img(v-if="form.getLoading", :src="Spinner")
+          span(v-else) {{ form.count }}
+
 </template>
-<style>
-  #new_photo_export .multiselect__input {
-    padding: unset;
-    border: unset;
-  }
-</style>
 
 <script>
-  import _ from 'lodash'
-  import $ from 'jquery' //TODO: get rid of jQuery
-  import debounce from 'debounce-promise'
+  import Vue from 'vue';
   import moment from 'moment'
-  import Multiselect from "vue-multiselect"
-  import 'vue-multiselect/dist/vue-multiselect.min.css'
-  import DatePicker from "vue-bootstrap-datetimepicker"
-  import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css'
   import Spinner from 'images/spinner'
 
-  const DEBOUNCE = 1500;
+  import DatePicker from "vue-bootstrap-datetimepicker"
+  import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css'
+  import VCalendar from 'v-calendar';
+  import 'v-calendar/lib/v-calendar.min.css';
+
+  import MultiSelectFilter from '@components/MultiSelectFilter'
+  import Multiselect from "vue-multiselect"
+  import 'vue-multiselect/dist/vue-multiselect.min.css'
+  import store from '@src/vuex/store'
+  import { mapState, mapGetters, mapActions } from 'vuex';
+  import { required, minLength, between } from 'vuelidate/lib/validators'
+
+  // import VueI18n from 'vue-i18n'
+  // https://medium.com/@kazu_pon/performance-optimization-of-vue-i18n-83099eb45c2d
+  // # _controller.rb
+  // @translations = I18n.t(".")
+  // form.html.haml
+  // <script type="text/javascript">
+  // window.I18n = = @translations.to_json.html_safe
+  // Vue.use(VueI18n);
+  //
+  // const i18n = new VueI18n({
+  //   locale: 'ru',
+  //   fallbackLocale: 'ru',
+  //   messages: translations
+  // })
+
+  Vue.use(VCalendar, {
+    firstDayOfWeek: 2,  // Monday
+    locale: 'ru'
+  });
+
   const DefaultDatePickerConfig = {
     icons: {
       time: 'icon-time',
-        date: 'icon-calendar',
-        up: 'icon-chevron-up',
-        down: 'icon-chevron-down',
-        previous: 'icon-angle-left',
-        next: 'icon-angle-right',
-        today: 'icon-circle',
-        clear: 'icon-trash',
-        close: 'icon-off'
+      date: 'icon-calendar',
+      up: 'icon-chevron-up',
+      down: 'icon-chevron-down',
+      previous: 'icon-angle-left',
+      next: 'icon-angle-right',
+      today: 'icon-circle',
+      clear: 'icon-trash',
+      close: 'icon-off'
     },
     locale: 'ru'
   };
 
   export default {
     name: 'photo-exports-form',
-    components: { DatePicker, Multiselect, Spinner, moment, debounce },
+    components: {
+      'businesses-select': MultiSelectFilter,
+      'chiefs-select': MultiSelectFilter,
+      'companies-select': MultiSelectFilter,
+      'signboards-select': MultiSelectFilter,
+      'location-types-select': MultiSelectFilter,
+      'location-ext-select': MultiSelectFilter,
+      'checkin-types-select': MultiSelectFilter,
+      'questions-select': MultiSelectFilter,
+      'extrafilter-select': MultiSelectFilter,
+      // 'subfolders-select': Multiselect,
+      Multiselect,
+      'datetime-picker': DatePicker,
+      Spinner, moment,
+    },
+    store: store,
     data() {
       return {
         Spinner,
-        formUrl: '/web_api/admin/photo_exports.json',
-        loading: false,
-        business: {
-          url: '/web_api/businesses.json',
+        subfolders: {
+          options: [
+            { value: 'company_name', label: 'Компания' },
+            { value: 'location_type_name', label: 'Тип ТТ' },
+            { value: 'signboard_name', label: 'Вывеска' },
+          ],
           selected: null,
-          options: []
         },
-        chief: {
-          url: '/web_api/users.json',
+        extended_filters: {
+          filters: [
+            { field: 'client_category', label: 'Категория клиента(client_category)' },
+            { field: 'region', label: 'Регион(region)' },
+            { field: 'channel', label: 'Канал(channel)' },
+            { field: 'iformat', label: 'Формат(iformat)' },
+            { field: 'territory', label: 'Территория(territory)' },
+            { field: 'territory_type', label: 'Тип территории(territory_type)' },
+            { field: 'network_name', label: 'Сеть(network_name)' },
+          ],
           selected: null,
-          options: [],
-          isLoading: false,
-          isDisabled: true
         },
-        checkin_type: {
-          url: '/web_api/admin/photo_exports/checkin_types.json',
-          selected: [],
-          options: [],
-          isLoading: false,
-          isDisabled: true
+        selectedDate: {
+          // start: new Date(2018, 4, 1),
+          // end: new Date(2018, 4, 5),
+          'min-date': moment().subtract(4, 'months'),
+          'max-date': moment().day(7),
+          // start: moment().day(-1),
+          // end: moment().day(0),
         },
-        company: {
-          url: '/web_api/admin/photo_exports/companies.json',
-          selected: [],
-          options: [],
-          isLoading: false,
-          isDisabled: true
+        themeStyles: {
+          wrapper: {
+            background: 'linear-gradient(to bottom right, #fafafa, #cccccc)',
+            color: '#000000',
+            border: '0',
+            boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.14), 0 6px 20px 0 rgba(0, 0, 0, 0.13)',
+            borderRadius: '5px',
+          },
         },
-        signboard: {
-          url: '/web_api/admin/photo_exports/signboards.json',
-          selected: [],
-          options: [],
-          isLoading: false,
-          isDisabled: true
-        },
-        dateFrom: null,
-        dateTill: null,
-        limit: null,
         processAt: null,
-        photoCount: 'N/A',
-        dateFromConfig: {
-          ...DefaultDatePickerConfig,
-          format: 'DD.MM.YYYY',
-          minDate: moment().subtract(4, 'months'),
-          maxDate: moment().day(7),
-          useCurrent: false
-        },
-        dateTillConfig: {
-          ...DefaultDatePickerConfig,
-          format: 'DD.MM.YYYY',
-          minDate: moment().subtract(4, 'months'),
-          maxDate: moment().day(7),
-          useCurrent: false
-        },
         processAtConfig: {
           ...DefaultDatePickerConfig,
           minDate: moment(),
           maxDate: moment().day(7),
           useCurrent: true
         },
-        requiredFieldChanged: null,
-        createdRecord: null,
-        sendDisabledClass: 'disabled'
+        // sendDisabledClass: 'disabled',
+        sendDisabledClass: null,
       }
+    },
+    computed: {
+      ...mapState({
+
+        form (state, getters) {
+          return getters['photo_count/form']
+        },
+
+      }),
+    },
+    created() {
+      store.dispatch("initModules", null);
     },
 
     mounted() {
-      $.ajaxSetup({
-        headers: {
-          'X-Csrf-Token': document.querySelector('meta[name="csrf-token"]').content
-        }
-      });
-      this.getBusinesses()
+      this.$store.dispatch("business/getItems", null)
     },
 
     methods: {
-      post: function (url, data, callback) {
-        return $.ajax({
-          url: url,
-          dataType: 'json',
-          type: 'POST',
-          data: data,
-          cache: false,
-          success: function (data, params) {
-            callback(data);
-          },
-          error: function (data, text, error) {
-            if (data.status === 0) {
-              return data.status = '0';
-            }
-          }
-        });
+
+      ...mapActions({
+        updateDateRangeValues (dispatch, payload) {
+          return dispatch('date_range/updateDateRange', payload)
+        }
+        // getFilterdunter (dispatch, payload) {
+        //   return dispatch('date_range/updateDateRange', payload)
+        // },
+      }),
+
+      updateDateRange: function(value) {
+        this.updateDateRangeValues({ date_from: value.start, date_till: value.end })
       },
 
-      getBusinesses: function() {
-        let self = this.business;
-        return $.getJSON(self.url,
-          { fields: ['id', 'name'] },
-          (result) => {
-            self.options = result.map((arg) => { return { label: arg.name, value: arg.id } });
-          })
-      },
-
-      getChiefs: debounce(function(search) {
-        let self = this.chief;
-        self.options = [];
-
-        let req = this.__composeRequest(self, search,
-          { business_id: this.businessId,
-            fields: ['id', 'name'],
-            search: search
-          });
-
-        return this.__returnResponse(self, req, search)
-      }, DEBOUNCE),
-
-      getCompanies: debounce(function(search) {
-        let self = this.company;
-        self.options = [];
-
-        let req = this.__composeRequest(self, search,
-          { business_id: this.businessId,
-            chief_id: this.chiefId,
-            date_from: this.dateFromToStr,
-            date_till:  this.dateTillToStr,
-            search: search
-          });
-
-        return this.__returnResponse(self, req, search)
-      }, DEBOUNCE),
-
-      getSignboards: debounce(function(search) {
-        let self = this.signboard;
-        self.options = [];
-
-        let req = this.__composeRequest(self, search,
-          { business_id: this.businessId,
-            chief_id: this.chiefId,
-            company_ids: this.companyIds,
-            date_from: this.dateFromToStr,
-            date_till:  this.dateTillToStr,
-            search: search
-          });
-
-        return this.__returnResponse(self, req, search)
-      }, DEBOUNCE),
-
-      getCheckinTypes: debounce(function(search) {
-        let self = this.checkin_type;
-        self.options = [];
-
-        let req = this.__composeRequest(self, search,
-          { business_id: this.businessId,
-            chief_id: this.chiefId,
-            company_ids: this.companyIds,
-            signboard_ids: this.signboardIds,
-            date_from: this.dateFromToStr,
-            date_till:  this.dateTillToStr,
-            search: search
-          });
-
-        return this.__returnResponse(self, req, search)
-
-      }, DEBOUNCE),
-
-      getPhotoCount: function() {
-
-        return $.getJSON('/web_api/admin/photo_exports/average_photo_count.json',
-          { business_id: this.businessId,
-            chief_id: this.chiefId,
-            company_ids: this.companyIds,
-            signboard_ids: this.signboardIds,
-            checkin_type_ids: this.checkinTypeIds,
-            date_from: this.dateFromToStr,
-            date_till:  this.dateTillToStr,
-             },
-          function (result) {
-            this.photoCount = result.photo_count;
-            this.loading = false;
-          }.bind(this))
-      },
-      areRequiredFieldsFilled() {
-        return _.filter([ this.businessId, this.dateFrom, this.dateTill ], _.isNil).length === 0
-      },
+      // areRequiredFieldsFilled() {
+      //   return _.filter([ this.businessId, this.dateFrom, this.dateTill ], _.isNil).length === 0
+      // },
 
       sendForm () {
-        let data = {
-          filters: {
-            limit: this.limit,
-            business_id: this.businessId,
-            chief_id: this.chiefId,
-            company_ids: this.companyIds,
-            signboard_ids: this.signboardIds,
-            checkin_type_ids: this.checkinTypeIds,
-            date_from: this.dateFromToStr,
-            date_till: this.dateTillToStr
-          },
-          process_at: this.processAtToStr
-        };
+        this.$store.dispatch('photo_export/submitForm', this.$store)
+      },
 
-        this.post(this.formUrl,
-                  data,
-                  function(result){ this.$emit('export-received', result) }.bind(this));
-      },
-      clearOptionalFields () {
-        [this.chief, this.company, this.signboard, this.checkin_type].forEach((i) => {
-          i.options = [];
-          i.selected = i === this.chief ? null : []
-        })
-      },
       clearForm() {
-        this.clearOptionalFields();
-        this.business.selected = null;
-        this.dateFrom = null;
-        this.dateTill = null
+        this.$store.dispatch('photo_export/clearForm', this.$store);
       },
-      __returnResponse(self, req, search){
-        if(search){
-          self.isLoading = true;
-        }
-        else{
-          self.isDisabled = true;
-        }
-        return req()
+
+      nameWithoutId ({ label }) {
+        return label
       },
-      __composeRequest(self, search, data){
-        return () => {
-          return $.getJSON(self.url, data).then((result) => {
-            search ? self.isLoading = false : self.isDisabled = false;
-            self.options = _.map(result, (arg) => { return { label: arg.name, value: (arg.ids || arg.id) } })
-          })
-        }
-      }
+
+      // addTag (newTag) {
+      //   let tag = {
+      //     name: newTag,
+      //     code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
+      //   }
+      //   this.location_groups_list.options.push(tag)
+      //   this.location_groups_list.value.push(tag)
+      //   this.selected_values = this.location_groups_list.value.join(',')
+      //   this.postGroup(newTag)
+      // },
+
     },
 
-    computed: {
-      requiredFields() {
-        this.businessId
-        this.dateFrom
-        this.dateTill
-        return Date.now()
-      },
-      allFields(){
-        return [this.companyIds,
-        this.chiefId,
-        this.signboardIds,
-        this.checkinTypeIds,
-        this.requiredFieldChanged].join('')
-      },
-      businessId(){
-        return (this.business.selected || {}).value
-      },
-      chiefId(){
-        return (this.chief.selected || {}).value
-      },
-      companyIds(){
-        return _.flatMap(this.company.selected, 'value')
-      },
-      signboardIds(){
-        return _.flatMap(this.signboard.selected, 'value')
-      },
-      checkinTypeIds(){
-        return _.flatMap(this.checkin_type.selected, 'value')
-      },
-      dateFromToStr(){
-        if (this.dateFrom){ return this.dateFrom.format("YYYY-MM-DD") }
-      },
-      dateTillToStr(){
-        if(this.dateTill){ return this.dateTill.format("YYYY-MM-DD") }
-      },
-      processAtToStr(){
-        if(this.processAt){ return this.processAt.toISOString() }
-      }
-    },
-
-    watch: {
-      'business.selected': function () {
-        this.clearOptionalFields();
-      },
-      requiredFields(){
-        if(this.areRequiredFieldsFilled()) {
-          this.requiredFieldChanged = Date.now()
-          this.sendDisabledClass = null
-        }
-        else { this.sendDisabledClass = 'disabled' }
-      },
-      allFields: async function(val) {
-        if(this.areRequiredFieldsFilled()) {
-          this.loading = true;
-          this.getChiefs();
-          await Promise.all([
-            this.getCompanies(),
-            this.getSignboards(),
-            this.getCheckinTypes()
-          ]);
-          return this.getPhotoCount()
-        }
-      }
-    }
   }
 </script>
 
+<style>
+  #new_photo_export .multiselect__input {
+    padding: unset;
+    border: unset;
+  }
+  li.multiselect__element {
+    padding: 0 0 0 0;
+  }
+</style>

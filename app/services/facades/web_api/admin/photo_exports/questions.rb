@@ -2,11 +2,11 @@ module Facades
   module WebApi
     module Admin
       module PhotoExports
-        class Signboards < ::Facades::WebApi::Signboards
+        class Questions < ::Facades::WebApi::Questions
 
           def scope
             return @scope if defined?(@scope)
-            @scope = Signboard.where(id: Photo.preselect("locations.signboard_id", params.permit!))
+            @scope = Question.where(id: Photo.preselect("photos.question_id", params.permit!))
             @scope
           end
 

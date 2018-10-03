@@ -5,26 +5,16 @@ require 'errors'
 module Photos
   module Helpers
 
-    def s3client
-      global_vars[:s3_client]
-    end
-
-    def object
-      global_vars[:object]
-    end
-
-    def aws_config
-      Rails.configuration.aws_options
-    end
-
     def file_name
       return @file_name if defined?(@file_name)
-
+      user = User.find(photo_export.filters.chief_id)
       @file_name = [ 'photo',
-        Business.find(object.filters.business_id).name,
-        object.filters.date_from.strftime('%d%m%Y'),
-        object.filters.date_till.strftime('%d%m%Y'),
-        object.id ].join('-') + '.zip'
+        Business.find(photo_export.filters.business_id).name.parameterize,
+        user.name.parameterize,
+        user.mobile_phone,
+        photo_export.filters.date_from.strftime('%d%m%Y'),
+        photo_export.filters.date_till.strftime('%d%m%Y'),
+        photo_export.id ].join('-') + '.zip'
 
       @file_name = NameCleaner.clean(@file_name, exclude_regex: /[\\:\/\*|"<>]/)
     end
@@ -45,10 +35,10 @@ module Photos
     end
 
     def update_percentage(diff_secs)
-      object = global_vars[:object]
-      return if object.nil?
-      object.reload
-      object.update_column :percent, object.percent.to_f + diff_secs
+      photo_export = global_vars[:photo_export]
+      return if photo_export.nil?
+      photo_export.reload
+      photo_export.update_column :percent, photo_export.percent.to_f + diff_secs
     end
 
     def handle_error(key, e)

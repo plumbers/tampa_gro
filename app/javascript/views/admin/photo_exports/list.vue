@@ -1,6 +1,6 @@
 <template lang="pug">
   .table-responsive
-    table#statusable-list.table.table-striped
+    table#table.table-striped
       thead
         tr
           th
@@ -57,7 +57,7 @@
       }
     },
     mounted(){
-      setInterval(this.statusableIds, 10000)
+      setInterval(this.statusableIds, 100000)
     },
     methods: {
       getItems: _.debounce(function($state){

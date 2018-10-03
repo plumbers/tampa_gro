@@ -1,5 +1,8 @@
-#encoding:utf-8
+require_relative '../services/facades/web_api/admin/photo_exports/filters'
+
 class Photo < ApplicationRecord
+  include ::Facades::WebApi::Admin::PhotoExports::Filters
+
   alias_attribute :visit_id, :checkin_id
 
   COMMON_IMAGE_OPTIONS =
@@ -37,64 +40,44 @@ class Photo < ApplicationRecord
   validates_attachment_content_type :image, IMAGE_CONTENT_VALIDATOR
   validates_attachment_content_type :aws_image, IMAGE_CONTENT_VALIDATOR
 
-  scope :with_dependencies, -> {
-    joins(<<~SQL
-        INNER JOIN checkins                 ON checkins.id                = photos.checkin_id
-        LEFT JOIN reports                  ON reports.id                 = photos.report_id
-        INNER JOIN users                    ON users.id                   = checkins.user_id
-        INNER JOIN locations                ON locations.id               = checkins.location_id
-        LEFT JOIN location_types           ON locations.location_type_id = location_types.id
-        INNER JOIN LATERAL(
-          SELECT user_versions.h_vector FROM user_versions
-          WHERE user_versions.item_id = users.id
-          AND user_versions.created_at < checkins.completed_at
-          ORDER BY created_at DESC
-          LIMIT 1
-        ) t on true
-      SQL
-    )
-  }
-
-  scope :date_from,           ->(started_date_from) { where("#{CHECKIN_STARTED_DATE} >= ?", started_date_from) }
-  scope :date_till,           ->(started_date_till) { where("#{CHECKIN_STARTED_DATE} <= ?", started_date_till.to_date.end_of_day.to_s) }
-  scope :location_type_id,    ->(location_type_id) { where('locations.location_type_id IN (?)', location_type_id) }
-  scope :business_id,         ->(business_id){ where('users.business_id = ?', business_id) }
-  scope :chief_id,            ->(chief_id){ where('t.h_vector @> ?', chief_id.to_s) }
-  scope :location_ids,        ->(location_ids) { where('locations.id IN (?)', location_ids) }
-  scope :aws_uploaded,        -> { where.not(aws_image_file_name: nil) }
-  scope :question_linked,     -> { where.not(question_id: nil) }
-  scope :question_not_linked, -> { where(question_id: nil) }
-
-  scope :company_ids,      ->(company_ids) { where('locations.company_id IN (?)', company_ids) }
-  scope :signboard_ids,    ->(signboard_ids) { where('locations.signboard_id IN (?)', signboard_ids) }
-  scope :organization_ids, ->(organization_ids) { where('users.organization_id IN (?)', organization_ids) }
-  scope :checkin_type_ids, ->(checkin_type_ids) { where('reports.checkin_type_id IN (?)', checkin_type_ids) }
-
-  scope_accessible :date_from, :date_till, :location_type_id, :business_id, :chief_id,
-                   :location_ids, :signboard_ids, :company_ids, :organization_ids, :checkin_type_ids
-
   def queue_upload_to_s3
     Rails.configuration.aws_uploader.perform_async(self.id, self.checkin_id)
-  end
-
-  def self.filtered(filters = {})
-    filters = HashWithIndifferentAccess.new(filters)
-
-    select_sql = <<-SQL.strip.gsub(':checkin_started_date', CHECKIN_STARTED_DATE)
-      REPLACE(locations.external_id, '*', '#') AS external_id,
-      :checkin_started_date AS started_date,
-      users.business_id,
-      checkins.timezone,
-      photos.*
-    SQL
-
-    self.with_dependencies.
-    select(select_sql).
-    periscope(filters).
-    limit(filters[:limit])
   end
 
   def aws_path
     (aws_image.exists? ? aws_image : image).path&.gsub(/\?.*|\A\/|.*\/system\//,'')
   end
+
+  # добавить следующие функции:
+  # 1) Фильтрация по опросникам;
+  # 1) Фильтрация по вопросу опросника;
+  # 5) Фильтрация по набору ExID точек;
+  # 6) Фильтрация по типу торговой точки;
+  # ***) Фильтрация по jsonb полю data из торговой точки - например, client_type
+  #     "region": "Золотое Кольцо",
+  #     "channel": "Современная Торговля",
+  #     "iformat": "Золотое Кольцо Атак S1 Владимир",
+  #     "territory": "Владимир",
+  #     "network_name": "Ашан",
+  #     "territory_type": "Первичные продажи",
+  #     "client_category": "Ключевые клиенты"
+
+  # 4) В названии ZIP файла добавить юзера, по которому создаётся выгрузка;
+
+  # --- 2) Добавление нескольких условий для выгрузки -
+  #         например:
+  #         выгрузить архив фото по опроснику +
+  #         в этом же запросе по нескольким вопросам другого опросника; (отложено)
+
+  # 8) Фильтрация по заголовку экрана
+
+  # USE from TO component
+  # 9) Опциональное правило формирования подкаталогов архива:
+  #     -  по датам
+  #     -  компания
+  #     -  вывеска
+  #     -  тип ТТ
+  # 10) Опциональное правило формирования имя файлов фоток (подрезать при макс длине кроме id фотки и даты):
+  #   - id точки, вывеска, юр. название, тип точки, опросник, название вопроса, дата, id фотки
+
 end

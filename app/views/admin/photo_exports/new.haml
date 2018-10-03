@@ -2,11 +2,7 @@
 - content_for(:body_class){ 'statusable' }
 - if can?(:create, PhotoExport)
   #app
-    .row
-      .col-sm-12
-        %photo-exports-form{ 'v-on:export-received' => 'addPhotoItem' }
-    .row
-      .col-sm-12
-        %photo-exports-list#upload-status.uploads_status{'v-bind:new-export' => 'newExport'}
+    %photo-export
+
 = javascript_pack_tag 'admin/photo_exports/application'
 = stylesheet_pack_tag 'admin/photo_exports/application'

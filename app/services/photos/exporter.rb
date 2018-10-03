@@ -5,29 +5,34 @@ module Photos
     include ThreadVars
     include Helpers
 
-    attr_accessor :photos_processor, :zip_full_path
+    attr_accessor :photos_processor, :zip_full_path, :photo_export
 
-    def initialize(object)
-      @object = object
+    def initialize(photo_export)
+      @photo_export = photo_export
       initialize_global_vars!
-      @photos_processor = Photos::Processor.new
+      opts = prepare
+      photo_export.update! opts
+      @photos_processor = Photos::Processor.new photo_export, 256, 64 # max_concurretncy <= 128
     end
 
     def process
-      object.update! started_at: Time.now, local_temp_folder: "#{ENV['RAILS_TEMP']}/#{object.id}"
-
       PhotoExport::PROCESSING_STAGES.each do |stage|
         begin
-          return false unless send(stage)
+          puts "#{Time.now}: ###### BEGIN #{stage}"
+          send(stage)
+          puts "#{Time.now}: ###### END #{stage}"
         rescue => e
+          puts "***** ERROR"
           handle_error(stage, e)
           return false
         end
       end
+      puts "***** DONE"
       true
     ensure
-      object.update! ended_at: Time.now
-      clean_up!
+      puts "***** ENSURE"
+      photo_export.update! ended_at: Time.now
+      clean_up! if photo_export.status == 'finished'
     end
 
     private
@@ -35,36 +40,34 @@ module Photos
     def initialize_global_vars!
       super
       global_vars[:logger] = Sidekiq.logger
-      global_vars[:s3_client] ||= Aws::S3::Client.new(aws_config[:s3_options].
-        merge(force_path_style: true, endpoint: "http://#{aws_config[:s3_credentials][:s3_host_name]}"))
-
     end
 
     def download_photos
       return false if photos_processor.photos.size.zero?
-
-      entry_weight = 60.0/photos_processor.photos.size.to_f
-
-      photos_processor.photos.each_with_index do |photo, i|
-        begin
-          photos_processor.download(photo)
-        rescue => e
-          handle_error photo, e
-        end
-        update_percentage(entry_weight*10) if i%10 == 0
+      puts "#{Time.now}: ###### BEGIN #{__method__}"
+      puts "Should process #{photos_processor.photos.size} photos"
+      begin
+        photos_processor.download_typhoeus
+      rescue => error
+        puts "#{Time.now}: -+-+-+-+-+-+-+--+-+-+-+-+-+-+- ERROR #{__method__}"
+        puts error
+        puts :error
+        handle_error(:download_photos, error)
       end
+      puts "#{Time.now}: ###### END #{__method__}"
     end
 
     def create_local_folder
-      FileUtils.mkpath(object.local_temp_folder)
+      FileUtils.mkpath(photo_export.local_temp_folder)
     end
 
     def make_archive
-      self.zip_full_path = File.join(object.local_temp_folder, file_name)
+      puts "#{Time.now}: ###### BEGIN #{__method__}"
+      self.zip_full_path = File.join(photo_export.local_temp_folder, file_name)
 
       FileUtils.rm_f zip_full_path
 
-      images = collect_files_except_filter(object.local_temp_folder, object.file_include_filter, file_name)
+      images = collect_files_except_filter(photo_export.local_temp_folder, photo_export.file_include_filter, file_name)
       total = images.size
 
       entry_weight = 28.0/total.to_f
@@ -72,22 +75,23 @@ module Photos
 
       Zip::File.open(zip_full_path, true) do |zip_file|
         images.each_with_index do |img, i|
-          zip_file.add(img.sub("#{object.local_temp_folder}/",''), img)
+          zip_file.add(img.sub("#{photo_export.local_temp_folder}/",''), img)
           logger.info "Add to Zip at #{(i*100.0/total).to_i}%" if i % 100 == 0
           update_percentage(entry_weight*10) if i%10 == 0
         end
       end
-
+      puts "#{Time.now}: ###### END #{__method__}"
     end
 
     def clean_up!
-      @object.reload
-      FileUtils.rm_rf(object.local_temp_folder)
+      @photo_export.reload
+      FileUtils.rm_rf(photo_export.local_temp_folder)
       super
     end
 
-    def save_file
-      object.update!(aws_file: File.open(zip_full_path))
+    def upload_archive
+      photo_export.update!(aws_file: File.open(zip_full_path))
+      puts photo_export.aws_file.url.gsub(/(http(s)?:\/\/)?(.*.com)\//, 'http://eu.mstdev.ru/')
     end
 
   end
