@@ -1,0 +1,185 @@
+---
+en:
+  services:
+    address_query_generator:
+      area: square
+      avenue: avenue
+      bystreet: lane
+      city: city
+      district: district
+      driveway: driveway
+      highway: highway
+      house: house
+      housing: corpus
+      ownership: ownership
+      seafront: seafront
+      street: street
+      structure: building
+    confirmations:
+      location_view:
+        no_photo: "(no photo)"
+    data_helpers:
+      headers:
+        address_point: stores address
+        agency_name: Agency's name
+        begin_work: Start time
+        category_product_id_1: Item category ID 1
+        category_product_id_2: Item category ID 2
+        category_product_id_3: Item category ID 3
+        category_product_id_4: Item category ID 4
+        channel: Channel (MT, TT, OP)
+        city: City
+        client_category: Customer category (NKA/LKA/TOP 10 LKA/Others)
+        client_name_legal_name: Customer name/legal name
+        client_name_signboard: Customer name/signboard name
+        data: Date
+        director_of_merchandising: Director of merchandising
+        end_work: Finish time
+        fact_visit: Travel time/Planned
+        fri: Fri
+        fri_1: Fri1
+        fri_2: Fri2
+        fri_3: Fri3
+        fri_4: Fri4
+        full_name_of_merchandiser: Merchandiser's name
+        full_name_of_supervisor: Supervisor's name
+        interior_format: Inner chain's format
+        latitude: Latitude
+        longitude: Longtitude
+        merchandising_type: Merchandising type (Dedicated visit, Dedicated stationary, Shared)
+        mon: Mn
+        mon_1: Mn1
+        mon_2: Mn2
+        mon_3: Mn3
+        mon_4: Mn4
+        network_name: Retail chain name
+        notes: Notes
+        number_visits_per_week: Visits amount per week
+        phone_director_of_merchandising: Director of merchandising's phone number
+        phone_of_merchandiser: Merchandiser's phone number
+        phone_of_regional_manager: Regional manager's phone number
+        phone_of_supervisor: Supervisor's phone number
+        phone_of_team_leader: Teamlead's phone number
+        plan: Plan
+        point_id: store ID
+        point_route: Route ID
+        point_type: store's type
+        questionary_id: Form ID
+        questionary_name: Form name
+        region: Region
+        regional_manager: Regional manager
+        sat: Sat
+        sat_1: Sat1
+        sat_2: Sat2
+        sat_3: Sat3
+        sat_4: Sat4
+        scheme_id: scheme ID (tech field)
+        set_planned_value_id: ID of planned values set
+        set_planned_value_name: Name of planned values set
+        sun: Sun
+        sun_1: Sun1
+        sun_2: Sun2
+        sun_3: Sun3
+        sun_4: Sun4
+        team_leader: Teamlead
+        territory: Territory
+        territory_type: Territory type (DSD/Distributor)
+        thu: Thu
+        thu_1: Thu1
+        thu_2: Thu2
+        thu_3: Thu3
+        thu_4: Thu4
+        time_displacement_plan: Travel time/planned
+        time_point_plan: Visit timing/planned
+        time_receipts_report: The time of report uploading
+        time_zone: Time zone
+        tue: Tue
+        tue_1: Tue1
+        tue_2: Tue2
+        tue_3: Tue3
+        tue_4: Tue4
+        unique_point_id: Unique store ID
+        unique_route_id: Unique route ID
+        unplanned_visit: Unrouted visit
+        wed: Wed
+        wed_1: Wed1
+        wed_2: Wed2
+        wed_3: Wed3
+        wed_4: Wed4
+      no_in_ap: absent in AP
+    kpi:
+      errors:
+        empthy_sheet: Empty '%{name}' of the sheet
+        missing_point_ID: No stores ID
+        sheets_not_processed: No sheets processed
+      parser:
+        sheet: Sheet '%{name}
+        sheet_line: Sheet '%{name}', line %{i}
+    scorecard:
+      errors:
+        absent_essence: 'Necessary essence absents: %{opts}'
+        absent_version: One more version is absent in the hierarchy of the merchandiser «%{merch_ver.id}»,  at the moment «%{time_point}»
+        inspector_location_version_not_exists: The version cannot be found InspectorLocation for the report «%{checkin.id}»
+        line_conflicts: The line %{dup_row.key} conflicts with %{conflicted_row.key}
+        plan_item_not_exists: The report«%{checkin.id}» contents ID of not existing plan «%{checkin.plan_item_id}»
+        report_start_user: 'Report id «%{checkin.id}» started before the user''s creation. Time of report starting: %{checkin.started_at}, user''s creation «%{merch_ver.id}»: %{merch_ver.created_at}'
+        task_not_found_report: Report for the task «%{report_id}» is not found.
+        user_version_not_found: 'User''s version is not found «%{checkin.id}» '
+      export:
+        xls:
+          abstract_sheet:
+            'false': 'no'
+            'true': 'yes'
+          base:
+            audit: "(audit) "
+          typed_sheet:
+            full_name_of_merchandiser: Merchandiser's name
+      row:
+        checkin_row:
+          photoreport: Photoreport
+        report_row:
+          photoreport: Photoreport
+    sms_sender:
+      invitation: "%{invitor_name} invited you to his team at mstlab24.ru. Use your phone number and password to login at the site  %{password}"
+      your_manager: Your manager
+      your_new_password: 'New password for mstlab24.ru: %{password}'
+      reset_password: "To reset your password visit url: %{url}"
+      otp_code: "Entrance code: %{password}"
+    location_events:
+      export:
+        external_id: Unique ID of location
+        route_id: Unique ID of route
+        signboard_name: Name of client/sinboard
+        address: Location address
+        is_order: Order (status)
+        complete: Complete (status)
+        incomplete: Incomplete (status)
+        location_comment: Problem in location (status)
+        sent_at: Sent at (date/time)
+        responded_at: Responded at (date/time)
+        author_role: Author
+        event_desc: Event description
+        performer_agency: Performer
+        answer: Answer
+        merchendiser_name: Merchendiser name
+        merchendiser_phone: merchendiser phone
+        supervisor_name: Supervisor name
+        supervisor_phone: Supervisor phone
+        teamlead_name: Teamlead name
+        teamlead_phone: Teamlead phone
+        regional_name: Regional manager
+        regional_phone: Regional manager phone
+        executive_name: Executive
+        executive_phone: Executve phone
+        region: Region
+        territory: Territory
+        city: City
+        company_name: Company name
+        network_name: Network name
+        client_category: Client category
+        channel: Channel
+        location_type: Location type
+        author_name: Author name
+        author_phone: Author phone
+        sent_date: Sent at (date)
+        responded_date: Responded at (date)

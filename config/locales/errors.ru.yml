@@ -1,0 +1,31 @@
+ru:
+  errors:
+    log_upload_creator:
+      upload_content_type_error: Формат файла архива ошибочен или неизвестен
+      upload_file_size_error: Размер файла превышает лимит
+      upload_encryption_key_version_error: Версия ключа шифрования отсутствует или имеет неправильный формат
+    fi:
+      invalid_checkin_type: Неверный тип анкеты
+    visits:
+      visit_duplicate_exists_error: За день можно сделать только один визит по точке
+      cant_modify_finished_visit_error: Нельзя обновлять завершенный визит
+      invalid_token_id_error: Неверное значение token_id
+      visit_is_not_finished_error: Визит не закончен
+      visit_access_denied_error: У вас нет прав доступа к данному визиту
+      invalid_photo_image_error: Не распознаны данные в data
+      invalid_photo_content_type_error: Указанный content_type не поддерживается
+    qlik:
+      business_canonical_name_empty: Не указано каноническое имя у бизнеса с ID %{business_id}
+      cannot_get_target_id: >
+        Ошибка при получении target_id, business_id=%{business_id}, user_id=%{user_id}
+      cannot_get_tiket:
+        Ошибка при получении тикета, business_id=%{business_id}, user_id=%{user_id}
+    two_factor_authentication:
+      otp_expired: Срок действия одноразового пароля истек
+      invalid_otp: Неправильный одноразовый пароль
+      retry_limit_exceeded: Количество попыток исчерпано, запросите одноразовый пароль
+      request_rate_limit_exceeded: Запросить новый одноразовый пароль можно только по истечению счетчика
+    partnerships:
+      invalid_client_contact_info: "имеет неверное значение"
+      duplicate: "ваша компания уже сотрудничает с этой компанией"
+      self_business: "ваша компания не может сотрудничать сама с собой"

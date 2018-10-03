@@ -1,0 +1,42 @@
+= content_for(:page_title){ t('locations.show.viewing_store')}
+= render "locations/navigation" if current_ability.can? :locations, :left_menu
+
+%h3= @location.full_name
+.row
+  .col-md-10
+    %text.bold
+      =t('locations.show.category')
+    = "#{@location.location_category.try(:name) || t('locations.show.location_category_not_specified')}"
+    %br
+    %text.bold
+      =t('locations.show.type')
+    = "#{@location.location_type.try(:name) || t('locations.show.location_type_not_specified')}"
+    %br
+    %text.bold
+      =t('locations.show.company')
+    - if @location.company
+      = @location.company.name
+    - else
+      =t('locations.show.location_category_not_specified')
+    %br
+      =t('locations.show.field_inspector_link')
+      = @location.field_inspector || t('locations.show.not_present')
+    %br
+    %br
+    - if @location.data.present?
+      - @location.data.each do |key, val|
+        - translations = I18n.t "activerecord.attributes.location.data"
+        - next if val.nil? || key == 'inner_route_id' || translations[key.to_sym].nil?
+        %text.bold
+          #{translations[key.to_sym]}:
+        = val.is_a?(Numeric) ? val.to_i : val
+        %br/
+  .row.margin-top-10
+    .col-md-10
+      #mymap
+      
+= render 'visitors_list' if current_ability.can?(:watch_visits, @location) && (@location.valid? || action_name == 'update')
+  
+#location_map_coordinates.hidden
+  = hidden_field_tag "location_lat", @location.lat
+  = hidden_field_tag "location_lon", @location.lon

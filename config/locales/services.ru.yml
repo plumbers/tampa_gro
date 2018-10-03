@@ -1,0 +1,186 @@
+---
+ru:
+  services:
+    address_query_generator:
+      area: "площадь пл"
+      avenue: "проспект пр\\-т пр\\-кт"
+      bystreet: "переулок пер"
+      city: "город гор г"
+      district: "район р\\-н"
+      driveway: "пр проезд пр\\-д"
+      highway: "шоссе ш}"
+      house: "дом д"
+      housing: "корпус корп к"
+      ownership: "владение вл\\-е вл"
+      seafront: "набережная наб\\-я наб"
+      street: "улица ул\\-ца ул"
+      structure: "строение стр\\-е стр"
+    confirmations:
+      location_view:
+        no_photo: "(нет фотографии)"
+    data_helpers:
+      headers:
+        address_point: "Адрес торговой точки"
+        agency_name: "Наименование агентства"
+        begin_work: "Начало работы"
+        category_product_id_1: ID категория товаров 1
+        category_product_id_2: ID категория товаров 2
+        category_product_id_3: ID категория товаров 3
+        category_product_id_4: ID категория товаров 4
+        channel: "Канал (MT, TT, OP)"
+        city: "Город"
+        client_category: "Категория клиента (NKA/LKA/TOP 10 LKA/Others)"
+        client_name_legal_name: "Наименование клиента/юридическое название"
+        client_name_signboard: "Наименование клиента/вывеска"
+        data: "Дата"
+        director_of_merchandising: "Директор по мерчендайзингу"
+        end_work: "Окончание работы"
+        fact_visit: "Время на перемещение/Факт"
+        fri: "Пт"
+        fri_1: "Пт1"
+        fri_2: "Пт2"
+        fri_3: "Пт3"
+        fri_4: "Пт4"
+        full_name_of_merchandiser: "ФИО мерчендайзера"
+        full_name_of_supervisor: "ФИО супервайзера"
+        interior_format: "Внутренний формат сети"
+        latitude: "Широта"
+        longitude: "Долгота"
+        merchandising_type: "Тип мерчендайзинга (Dedicated visit, Dedicated stationary, Shared)"
+        mon: "Пн"
+        mon_1: "Пн1"
+        mon_2: "Пн2"
+        mon_3: "Пн3"
+        mon_4: "Пн4"
+        network_name: "Наименование сети"
+        notes: "Примечания"
+        number_visits_per_week: "Кол-во визитов в неделю"
+        phone_director_of_merchandising: "Телефон директора по мерчендайзингу"
+        phone_of_merchandiser: "Телефон мерчендайзера"
+        phone_of_regional_manager: "Телефон регионального менеджера"
+        phone_of_supervisor: "Телефон супервайзера"
+        phone_of_team_leader: "Телефон территориального менеджера"
+        plan: "План"
+        point_id: ID точки
+        point_route: ID маршрута
+        point_type: "Тип торговой точки"
+        questionary_id: ID анкеты
+        questionary_name: "Наименование анкеты"
+        region: "Регион"
+        regional_manager: "Региональный менеджер"
+        sat: "Сб"
+        sat_1: "Сб1"
+        sat_2: "Сб2"
+        sat_3: "Сб3"
+        sat_4: "Сб4"
+        scheme_id: ID схемы (техническое поле)
+        set_planned_value_id: ID набора плановых значений
+        set_planned_value_name: "Наименование набора плановых значений"
+        sun: "Вс"
+        sun_1: "Вс1"
+        sun_2: "Вс2"
+        sun_3: "Вс3"
+        sun_4: "Вс4"
+        team_leader: "Территориальный менеджер (Тимлид)"
+        territory: "Территория"
+        territory_type: "Тип территории (DSD/Distributor)"
+        thu: "Чт"
+        thu_1: "Чт1"
+        thu_2: "Чт2"
+        thu_3: "Чт3"
+        thu_4: "Чт4"
+        time_displacement_plan: "Время на перемещение/План"
+        time_point_plan: "Время в точке/Факт"
+        time_receipts_report: "Время поступления отчета на сервер"
+        time_zone: "Часовой пояс"
+        tue: "Вт"
+        tue_1: "Вт1"
+        tue_2: "Вт2"
+        tue_3: "Вт3"
+        tue_4: "Вт4"
+        unique_point_id: "Уникальный ID точки"
+        unique_route_id: "Уникальный ID маршрута"
+        unplanned_visit: "Незапланированное посещение"
+        wed: "Ср"
+        wed_1: "Ср1"
+        wed_2: "Ср2"
+        wed_3: "Ср3"
+        wed_4: "Ср4"
+      no_in_ap: "нет в АП"
+    kpi:
+      errors:
+        empthy_sheet: "Лист '%{name}' пустой"
+        missing_point_ID: "Отсутствует ID точки"
+        sheets_not_processed: "Ни один лист из файла не был обработан"
+      parser:
+        key_location: "Лист '%{sheet}', строка %{line}, точка %{location}"
+        key_line: "Лист '%{sheet}', строка %{line}"
+        key_sheet: "Лист '%{sheet}'"
+    scorecard:
+      errors:
+        absent_essence: "Необходимая сущность отсутствует: %{opts}"
+        absent_version: "Одна или несколько версий отсутвтуют в иерархии для версии мерча «%{merch_ver.id}», на момент «%{time_point}»"
+        inspector_location_version_not_exists: "Не удалось найти версию InspectorLocation для отчета «%{checkin.id}»"
+        line_conflicts: "Строка %{dup_row.key} конфликтует с %{conflicted_row.key}"
+        plan_item_not_exists: "Отчет «%{checkin.id}» содержит id несуществущего плана «%{checkin.plan_item_id}»"
+        report_start_user: "Отчет id «%{checkin.id}» начат раньше создания пользователя. Время начала отчета: %{checkin.started_at}, создания пользователя «%{merch_ver.id}»: %{merch_ver.created_at}"
+        task_not_found_report: "Для задания «%{report_id}» не найден отчет."
+        user_version_not_found: "Для отчета «%{checkin.id}» не найдена версия пользователя"
+      export:
+        xls:
+          abstract_sheet:
+            'false': "нет"
+            'true': "да"
+          base:
+            audit: "(Аудит) "
+          typed_sheet:
+            full_name_of_merchandiser: "ФИО мерчендайзера"
+      row:
+        checkin_row:
+          photoreport: "Фотоотчет"
+        report_row:
+          photoreport: "Фотоотчет"
+    sms_sender:
+      invitation: "%{invitor_name} пригласил вас в свою команду на mstlab24.ru. Для входа на сайт используйте свой номер телефона и пароль %{password}"
+      your_manager: "Ваш начальник"
+      your_new_password: "Ваш новый пароль для mstlab24.ru: %{password}"
+      reset_password: "Для смены пароля перейдите по ссылке: %{url}"
+      otp_code: "Код для входа: %{password}"
+    location_events:
+      export:
+        external_id: Уникальный ID точки
+        route_id: Уникальный ID маршрута
+        signboard_name: Название клиента/вывеска
+        address: Адрес торговой точки
+        is_order: Задача (статус)
+        complete: Выполнено (статус)
+        incomplete: Не выполнено (статус)
+        location_comment: Проблема в ТТ (статус)
+        sent_at: Задача отправлена (дата/время)
+        responded_at: Ответ получен (дата/время)
+        author_role: Отправитель
+        event_desc: Задача
+        performer_agency: Исполнитель
+        answer: Ответ
+        merchendiser_name: ФИО полевого сотрудника
+        merchendiser_phone: Телефон полевого сотрудника
+        supervisor_name: ФИО супервайзера
+        supervisor_phone: Телефон супервайзера
+        teamlead_name: Территориальный менеджер (Тимлид)
+        teamlead_phone: Телефон территориального менеджера
+        regional_manager_name: Региональный менеджер
+        regional_manager_phone: Телефон регионального менеджера
+        executive_name: Директор по мерчендайзингу
+        executive_phone: Телефон директора по мерчендайзингу
+        region: Регион
+        territory: Территория
+        city: Город
+        company_name: Наименование клиента/юридическое название
+        network_name: Наименование сети
+        client_category: Категория клиента (NKA/LKA/TOP 10 LKA/Others)
+        channel: Канал (MT, TT, OP)
+        location_type: Тип торговой точки
+        author_name: ФИО отправителя
+        author_phone: Телефон отправителя
+        sent_date: Задача отправлена (дата)
+        responded_date: Ответ получен (дата)
