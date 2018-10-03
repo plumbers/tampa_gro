@@ -1,0 +1,9 @@
+= content_for(:page_title){ t('.title', id: @upload_facade.params[:id]) }
+.row
+  .col-sm-12.well
+    - @upload_facade.names.each do |name|
+      %a{href: "##{name}"}= name
+    - @upload_facade.show do |name, strings|
+      %h4{id: name}= "#{name} (#{ t('.last_n_rows', count: @upload_facade.class::SHOW_LIMIT) }) "
+      - strings.each do |str|
+        %pre= str

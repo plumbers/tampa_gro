@@ -1,5 +1,72 @@
 #encoding:utf-8
+# == Schema Information
+#
+# Table name: users
+#
+#  id                     :integer          not null, primary key
+#  email                  :string(255)      default("")
+#  encrypted_password     :string(255)      default("")
+#  reset_password_token   :string(255)
+#  reset_password_sent_at :datetime
+#  remember_created_at    :datetime
+#  sign_in_count          :integer          default(0)
+#  current_sign_in_at     :datetime
+#  last_sign_in_at        :datetime
+#  current_sign_in_ip     :string(255)
+#  last_sign_in_ip        :string(255)
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  name                   :string(255)
+#  organization_id        :integer
+#  mobile_phone           :string(255)
+#  supervisor_id          :integer
+#  invitation_token       :string(255)
+#  invitation_sent_at     :datetime
+#  invitation_accepted_at :datetime
+#  invitation_limit       :integer
+#  invited_by_id          :integer
+#  invited_by_type        :string(255)
+#  deleted_at             :datetime
+#  intro                  :text
+#  invitation_created_at  :datetime
+#  role                   :string(255)
+#  route_id               :string(255)
+#  imported               :boolean          default(FALSE)
+#  mobile_login_count     :integer          default(0)
+#  timezone               :string(255)
+#  agreement_versions     :jsonb
+#  scorecard_top          :boolean          default(FALSE), not null
+#  business_id            :integer
+#
+# Indexes
+#
+#  index_users_on_business_id                   (business_id)
+#  index_users_on_deleted_at                    (deleted_at)
+#  index_users_on_email                         (email)
+#  index_users_on_imported                      (imported)
+#  index_users_on_invitation_token              (invitation_token) UNIQUE
+#  index_users_on_invited_by_id                 (invited_by_id)
+#  index_users_on_mobile_login_count            (mobile_login_count)
+#  index_users_on_mobile_phone                  (mobile_phone)
+#  index_users_on_organization_id               (organization_id)
+#  index_users_on_reset_password_token          (reset_password_token) UNIQUE
+#  index_users_on_role                          (role)
+#  index_users_on_route_id                      (route_id)
+#  index_users_on_scorecard_top                 (scorecard_top)
+#  index_users_on_supervisor_id                 (supervisor_id)
+#  users_not_deleted_unique_mobile_phone_index  (mobile_phone) UNIQUE
+#
+
 class User < ApplicationRecord
+
+  NO_LEFT_MENU_PAGES = [['checkins', 'edit'], ['checkins', 'edit_1_release'],
+                        ['locations', 'nearby'],
+                        ['users', 'set_profile'], ['users', 'update_profile'],
+                        ['errors', 'exception'], ['errors', 'not_found']]
+  ALLOWED_ROLES = %w(
+    merchendiser supervisor teamlead trade_person content_manager regional_manager
+    manager executive director head_manager ceo president operator coordinator
+  ).freeze
 
   attr_accessor :email_or_phone, :notify_by_sms
 
@@ -52,6 +119,7 @@ class User < ApplicationRecord
            source: :location
 
   has_many :calendars
+  has_one  :encryption_key
 
   has_settings do |s|
     s.key :nearby_map, defaults: Location::NEARBY_DEFAULT
@@ -82,6 +150,8 @@ class User < ApplicationRecord
   end
 
   sanitize_parameters :name
+
+  after_initialize :create_encryption_key, if: :new_record?
 
   def group_ids
     if self.organization

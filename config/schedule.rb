@@ -30,6 +30,8 @@ def every_if_enabled(name, period, options = {})
   end
 end
 
+every_if_enabled 'users_encryption_key_regeneration',       '30 0 1 */3 *',     roles: :db
+
 every '0 4 * * *' do
   command_with_system_path 'find . -type d -empty -delete'
 end

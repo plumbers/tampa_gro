@@ -77,6 +77,22 @@ en:
       successfull_deleted: "Minimal application version was successfully deleted"
     scorecards:
       setup_businesses: Setup businesses
+    log_uploads:
+      index:
+        breadcrumb: Uploaded logs
+        title: Logs from client devices
+        table:
+          titles:
+            user: User
+            archive: Archive
+            details: Details
+          values:
+            download: Download
+            details: Details
+      show:
+        title: Log (%{id})
+        breadcrumb: Log (%{id})
+        last_n_rows: Last %{count} rows
   ap_exports:
     header:
       delete_export: Delete the export?

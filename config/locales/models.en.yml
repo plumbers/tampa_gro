@@ -8,6 +8,9 @@ en:
         1_week: 1 week
         4_week: 4 weeks
         merchandising: Merchandising
+    log_upload:
+      unsupported_type_file: "Unsupported file type - zip only"
+      permissible_size_less_15mb: "permissible size less then 15Мб"
     checkins:
       checkin:
         not_complete_report_before: Cannot complete the report before visit execution.

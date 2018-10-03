@@ -166,6 +166,22 @@ ru:
         export: "Выгрузка %{file_name}"
         number: "№"
         page_title: "Выгрузка %{file_name}"
+    log_uploads:
+      index:
+        breadcrumb: Загруженные логи
+        title: Логи с клиентских устройств
+        table:
+          titles:
+            user: Пользователь
+            archive: Архив
+            details: Сведения
+          values:
+            download: Скачать
+            details: Подробнее
+      show:
+        title:  Лог (%{id})
+        breadcrumb: Лог (%{id})
+        last_n_rows: Последние %{count} строк
 
   ap_exports:
     header:
@@ -281,6 +297,8 @@ ru:
       export_ap: "Экспорт АП"
     ap_uploads_menu:
       download_ap: "Загрузка АП"
+    log_uploads_menu:
+      uploaded_logs: "Загруженные логи"
     businesses:
       businesses: "Бизнесы"
     calendar_menu:

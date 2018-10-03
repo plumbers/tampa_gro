@@ -35,7 +35,13 @@ class Upload < ApplicationRecord
     application/octet-stream
   )
 
-  STATUSES = {0 => :not_started, 1 => :in_progress, 2 => :finished, 3 => :error, 4 => :deleted}
+  STATUSES = { 0 => :not_started, 1 => :in_progress, 2 => :finished, 3 => :error, 4 => :deleted }
+
+  COMMON_CONTENT_TYPES = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                          'application/zip',
+                          'application/octet-stream'].freeze
+
+  COMMON_FILE_NAME = [/\.xlsx\Z/, /\.zip\Z/].freeze
 
   enum status: [:not_started, :in_progress, :finished, :error, :deleted]
 
@@ -45,12 +51,20 @@ class Upload < ApplicationRecord
   has_attached_file :file
 
   validates_presence_of :type, :user_id
-  validates_attachment_content_type :file, content_type: CONTENT_TYPES
-  validates_attachment_file_name :file, matches: [/\.(xlsx)\z/]
-
   validates_presence_of :file
+  validates_attachment :file, content_type: { content_type: COMMON_CONTENT_TYPES + content_types },
+                       file_name: { matches: COMMON_FILE_NAME + file_name_pattern }
 
   belongs_to :user, class_name: 'UserUnscoped'
+
+  #TODO: Interface to reimplement in subclasses
+  def self.content_types
+    []
+  end
+
+  def self.file_name_pattern
+    []
+  end
 
   store :failed_rows, coder: YAML
 

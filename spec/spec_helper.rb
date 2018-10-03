@@ -16,6 +16,9 @@ require Rails.root.join('features/support/assistance.rb')
 # require 'rspec/active_job'
 require 'rspec-sidekiq'
 require 'webmock/rspec'
+require 'whenever'
+require 'shoulda/whenever/schedule_matcher'
+require 'rspec/matchers/fail_matchers'
 
 require 'test_prof/recipes/rspec/let_it_be'
 
@@ -68,8 +71,19 @@ RSpec.configure do |config|
     Rspec::Assistance.scorecard_event_bus_switch :off
   end
 
+  # suppress stdout/puts trace when expected error raised
+  config.around(:each, :expect_failure) do |example|
+    original_stderr = $stderr
+    original_stdout = $stdout
+    config.before { allow($stderr).to receive(:puts) }
+    config.before { allow($stdout).to receive(:puts) }
+    example.run
+    $stderr = original_stderr
+    $stdout = original_stdout
+  end
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  #config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  # config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   config.include FactoryGirl::Syntax::Methods
   config.include Devise::Test::ControllerHelpers, type: :controller

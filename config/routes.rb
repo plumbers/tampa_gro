@@ -1,6 +1,6 @@
 require 'sidekiq/web'
 
-Ahad::Application.routes.draw do
+Valkyrie::Application.routes.draw do
   scope :format => true, :constraints => { :format => 'json' } do
     api vendor_string: "mobileforce", default_version: 3 do
 
@@ -97,7 +97,9 @@ Ahad::Application.routes.draw do
           inherit from: 'v8'
 
           resources :reports, only: :index
+          resources :log_uploads, only: [:create, :show]
           get '/locations/linked_with_route'
+          get '/encryption/key' => 'encryption#key'
         end
       end
 
@@ -286,6 +288,10 @@ Ahad::Application.routes.draw do
       collection do
         get :update_states
       end
+    end
+
+    resources :log_uploads, only: [:index, :show] do
+      get :download, on: :member
     end
   end
 

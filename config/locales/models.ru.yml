@@ -8,6 +8,9 @@ ru:
         1_week: 1 неделя
         4_week: 4 недели
         merchandising: "Мерчендайзинг"
+    log_upload:
+      unsupported_type_file: "тип файла не поддерживается (только zip)"
+      permissible_size_less_15mb: "допустимый размер до 15Мб"
     businesses:
       settings:
         radius_should_fit: "Должен быть в пределах от %{min}м. до %{max}м."

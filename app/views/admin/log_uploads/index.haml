@@ -1,0 +1,28 @@
+= content_for(:page_title){ t('.title')}
+%div
+  .uploads_status
+    %h4{:style => "text-align: center;"}= t('.title')
+    .table-responsive
+      %table#statusable-list.table
+        %tr
+          %th
+            = render 'application/data_tables/timings_header', klass: LogUpload
+
+          %th= t('.table.titles.user')
+          %th= t('.table.titles.archive')
+          %th= t('.table.titles.details')
+        - if @uploads && @uploads.any?
+          - @uploads.group_by(&:created_date).each do |date, date_uploads|
+            %tr.scorecard-date
+              %td{colspan: 4, style: 'font-size: 110%; color: #e5e5e5; text-align: center;'}= date
+            - date_uploads.each do |upload|
+              %tr
+                %td
+                  = render 'application/data_tables/timings_cell', object: upload
+                %td= UserUnscoped.find_by(id: upload.user_id)&.name || 'N/A'
+                %td= link_to t('.table.values.download'), download_admin_log_upload_path(upload.id)
+                %td= link_to t('.table.values.details'), admin_log_upload_path(upload.id)
+.row
+  .col-md-12.clearfix
+    = will_paginate @uploads, renderer: BootstrapPagination::Rails, next_label: %q{<i class='icon-caret-right'></i>},
+    previous_label: %q{<i class='icon-caret-left'></i>}

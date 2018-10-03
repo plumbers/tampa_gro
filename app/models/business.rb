@@ -24,13 +24,16 @@ class Business < ApplicationRecord
   DEFAULT_OPTIONS = { questionary_constructor: { hidden_answer_types: [] },
                       nearby_map: Location::NEARBY_DEFAULT,
                       generate_scorecard: false, complex_passwords: false,
-                      features: [] }
+                      features: [],
+                      encryption: EncryptionKey::DEFAULT_OPTS
+  }
 
   jsonb_accessor :options,
                  questionary_constructor: { hidden_answer_types: :string_array },
                  nearby_map: { nearby_radius: :integer, chief_nearby_radius: :integer },
                  generate_scorecard: :boolean, complex_passwords: :boolean,
-                 features: :string_array
+                 features: :string_array,
+                 encryption: { key: { length: :integer, type: :string }, expiration_period: :integer }
 
   after_initialize :set_default_options
 

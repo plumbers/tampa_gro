@@ -1,5 +1,12 @@
 ru:
   errors:
+    facades:
+      api:
+        v9:
+          log_upload_creator:
+            upload_content_type_error: Формат файла архива ошибочен или неизвестен
+            upload_file_size_error: Размер файла превышает лимит
+            upload_encryption_key_version_error: Версия ключа шифрования отсутствует или имеет неправильный формат
     fi:
       invalid_checkin_type: Неверный тип анкеты
     visits:
