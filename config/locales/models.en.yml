@@ -1,0 +1,63 @@
+---
+en:
+  models:
+    address_program:
+      ap_export:
+        select_sheet_export: At least one sheet should be chosen for export
+      ap_upload:
+        1_week: 1 week
+        4_week: 4 weeks
+        merchandising: Merchandising
+    checkins:
+      checkin:
+        not_complete_report_before: Cannot complete the report before visit execution.
+        point_not_match_report: The routed store doesn't match reported store
+      checkin_type:
+        end_date_not_beginning: Finish date cannot be set earlier than start date.
+      planogram_bundle:
+        fill: Must be filled
+        not_less_symbols: Cannot be less than %{MIN_NOTE_LENGTH} symbols
+        not_more_symbols: Cannot be more than %{MAX_NOTE_LENGTH} symbols
+        specify_another_name: The name is used, choose another one
+      planogram_image:
+        is_required: Filling required
+        not_less_symbols: Cannot be less than %{MIN_NOTE_LENGTH} symbols
+        not_more_symbols: Cannot be more than %{MAX_NOTE_LENGTH} symbols
+        permissible_size_10kb_1mb: The size available is from 10KB to 1MB
+        select_image: Choose the image
+    companies:
+      company:
+        contain_more_2_symbols: Should content not less than 2 symbols
+        network: Chain %{self.name}
+      location:
+        available_signboard: Signboard name should be selected from the list.
+        point: store %{self.full_name}
+    concerns:
+    location_events:
+      location_problem:
+        agency: Agency
+      order:
+        agency: Agency
+    photo:
+      unsupported_type_file: Invalid file type (only jpeg/png/gif images are supported)
+    plans:
+      plan:
+        route: Route %{inspector.name} for %{thedate.standard_time_view} (%{plan_items.where(:status_id => PlanItem::ACTIVE).count} ТТ)
+      plan_item:
+        fix_point_plan_today: The store is already routed for today.
+        no_add_plan_complete: You cannot add stores to today's route.
+        visit: Visit for %{plan_date}
+    sales_month:
+      total: Total
+    scorecard:
+      scorecard_mart:
+        replaced_merchandiser: the merchandiser is replaced or absent in the AP
+    unused:
+      promo_sku:
+        coincide_location_sku_promo: sku and promo location should match
+    users:
+      organization:
+        contain_no_less_symbols: should contain more than two symbols
+        free: 'Free: '
+        incorrect_report_type: incorrect report type
+        paid: 'Paid: '

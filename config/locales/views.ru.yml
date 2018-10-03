@@ -1,0 +1,839 @@
+---
+ru:
+  admin:
+    ap_uploads:
+      index:
+        title: Загрузка АП
+      edit:
+        title: Принятие решений
+      navigation:
+        coordinator: От Координаторов
+        content_manager: От Контент-Менеджеров
+      forms:
+        new_ap:
+          select_file: Выбрать файл
+          upload: Загрузить
+        review:
+          change_file: Заменить файл
+          approve: Проставить на загрузку
+          reject: Отклонить
+    upload_versions:
+      index:
+        title: Версии
+        details: Подробности
+        versions: Изменения
+    businesses:
+      form_title:
+        creating_business: "Создание бизнеса"
+        editing_business: "Редактирование бизнеса"
+      successfull_create: "Бизнес успешно создан"
+      successfull_update: "Бизнес успешно обновлен"
+      table:
+        top_name: "Руководитель"
+      table_title:
+        businesses_title: "Бизнесы"
+      form:
+        force_update_versions: "Минимальные версии приложений"
+        have_not_mobile_versions: "Не задано ни одной минимальной версии"
+    deferred_jobs:
+      new:
+        deferred_jobs_list: "Список заданий"
+        title: "Отложенные задания"
+      show:
+        job_errors:
+          description: "Описание"
+          key: "Ключ"
+          title: "Ошибки"
+        title: "Отложенная задача"
+    kpi_templates:
+      form:
+        checkin_formula: "Формула для агрегации данных по вопросам анкеты"
+        location_formula: "Формула для агрегации данных по одной ТТ в интервале времени (день, месяц)"
+        result_type: "Тип ответа"
+        source_type: "Источник"
+        unit: "Единица измерения"
+        user_formula: "Формула для вычисления общего результата по всем ТТ (территория)"
+      index:
+        have_not_businesses: "Необходимо создать хотя бы один бизнес"
+        kpi_templates_title: "Шаблоны KPI"
+        select_business: "Выберите бизнес"
+      kpis:
+        has_not_kpis: "Для этого бизнеса нет KPI"
+        kpis_for_business: KPI для бизнеса %{business_name}
+        name: "Название"
+        created_at: "Дата создания"
+        active: "Активен"
+      successfull_create: "KPI шаблон успешно создан"
+      successfull_destroy: "KPI шаблон успешно удален"
+      successfull_update: "KPI шаблон успешно обновлен"
+      cannot_destroy_active: "Невозможно удалить активный KPI шаблон"
+      units:
+        items: "шт"
+        percent: "%"
+        price: "руб"
+    user_businesses:
+      success_update: "Бизнес пользователя успешно обновлен"
+    users:
+      actions:
+        account: "Аккаунт..."
+        actions: "Действия"
+        add_to_business: "Проставить бизнес"
+        delete: "Удалить..."
+        edit_warning: "Внимание! При смене анкеты она сменится у тимлида и всей его команды. Это может привести к ошибкам, если команда уже работает."
+        find_teamlead: "Найти тимлида"
+        sign_in_as: "Войти"
+      index:
+        account: "Аккаунт"
+        actions: "Действия"
+        custom_reportable: "Настраиваемая"
+        email: Email
+        found: "Найдено: %{count}"
+        name: "Имя"
+        name_phone_or_email: "Имя, телефон или email"
+        report_type: "Анкета"
+        search: "Искать"
+        search_users: "Поиск пользователя:"
+        title: "Пользователи"
+      history:
+        search: 'Искать'
+        value: 'Строка поиска'
+        search_history: 'Поиск истории по:'
+        by_mobile_phone: Телефону
+        by_email: Email-у
+        found: "Найдено: %{count}"
+        name: "Имя"
+        event: 'Событие'
+        date: 'Дата'
+        result_attributes: 'Результат'
+        changes: 'Изменения'
+        create: Создание
+        update: Обновление
+        destroy: Удаление
+    users_businesses:
+      form:
+        choose_business: "Выберите бизнес"
+        updating: "Пожалуйста подождите. Данные обновляются."
+    location_events:
+      header:
+        restart_job: "Перезапустить задачу"
+        status: "Статус"
+        export_date: "Дата выгрузки"
+      navigation:
+        autogeneration: "Автогенерация кэша событий"
+        export: "Экспорт событий"
+      index:
+        list_of_jobs: "Список задач генерации кэша событий"
+        started_at: "Дата начала"
+        finished_at: "Дата окончания"
+        business: "Бизнес"
+        date: "Дата"
+        progress: "Прогресс"
+        counts: "Кол-во записей"
+    mobile_versions:
+      successfull_created: "Минимальная версия приложения успешно создана"
+      successfull_updated: "Минимальная версия приложения успешно обновлена"
+      successfull_deleted: "Минимальная версия приложения была успешно удалена"
+    scorecards:
+      setup_businesses: Настроить бизнесы
+    photo_exports:
+      header:
+        delete_export: "Удалить эту выгрузку?"
+        delete_file: "Удалить файл"
+        delete_unloading: ''
+        export_data: "Дата выгрузки"
+        export_type: "Тип выгрузки"
+        file_size: "Размер файла"
+        status: "Статус"
+      new:
+        date_of_creation: "Дата создания"
+        download_export: "Скачать выгрузку"
+        download: "Скачать"
+        export_list: "Список выгрузок"
+        generate_export: "Сформировать выгрузку"
+        information: "Сведения"
+        more_detailed: "Подробнее"
+        progress: "Прогресс"
+        export_photo: "Выгрузка фотографий"
+        form_export: "Сформировать выгрузку"
+      successfull_create: "Задание экспорта фото успешно создано"
+      successfull_destroy: "Задание экспорта фото успешно удалено"
+      successfull_update: "Задание экспорта фото успешно обновлено"
+      cannot_destroy_active: "Невозможно удалить активное задание экспорта фото"
+      show:
+        errors: "Ошибки"
+        errors_export: "Ошибки выгрузки"
+        errors_unloading: ''
+        export: "Выгрузка %{file_name}"
+        number: "№"
+        page_title: "Выгрузка %{file_name}"
+
+  ap_exports:
+    header:
+      delete_export: "Удалить эту выгрузку?"
+      delete_file: "Удалить файл"
+      delete_unloading: ''
+      export_data: "Дата выгрузки"
+      export_type: "Тип выгрузки"
+      file_size: "Размер файла"
+      status: "Статус"
+    new:
+      date_of_creation: "Дата создания"
+      download_export: "Скачать выгрузку"
+      download: "Скачать"
+      export_ap: ''
+      export_list: "Список выгрузок"
+      generate_export: "Сформировать выгрузку"
+      information: "Сведения"
+      master_sheet: "Основной лист"
+      more_detailed: "Подробнее"
+      progress: "Прогресс"
+      set_planned_value: "Наборы плановых значений"
+      type_schedule: "Тип расписания"
+    show:
+      errors: "Ошибки"
+      errors_export: "Ошибки выгрузки"
+      errors_unloading: ''
+      export: "Выгрузка %{file_name}"
+      number: "№"
+      page_title: "Выгрузка %{file_name}"
+  ap_uploads:
+    for_clients:
+      errors: "Ошибки"
+      route_id_point_id: ID маршрута / ID точки
+      validation_error: "Ошибка валидации"
+    index:
+      actions: "Действия"
+      upload_list: "Список загрузок"
+      ap_upload: "Загрузка адресной программы"
+      upload: "Загрузить АП"
+    show:
+      downloaded_file: "Загруженный файл %{file_name}"
+      errors: "Ошибки"
+      errors_ap: "Ошибки загрузки АП"
+      for_clients: "Для клиентов"
+      number: "№"
+      route_id_point_id: "Маршрут/ТТ, маршрут, лист"
+      upload_info: "Отчет о загрузке"
+      download: "Скачать"
+    edit:
+      page_title: "Редактирование загрузки АП"
+    form:
+      upload: "Загрузить"
+      select_file: "Выбрать файл"
+      choose_file: "Выберите файл"
+  api:
+    legacy:
+      evaluations:
+        merch_state:
+          acceptable: "удовлетворительно"
+          best: "отлично"
+          good: "хорошо"
+          no_info: "(неизвестно)"
+          unacceptable: "неудовлетворительно"
+    v6:
+      locations:
+        sales:
+          dp: "ДП"
+          tmp: "ТМП"
+          total: "ИТОГО"
+          ydg: "ЙДГ"
+        sales_days:
+          dp: "ДП"
+          tmp: "ТМП"
+          total: "ИТОГО"
+          ydg: "ЙДГ"
+  assortments:
+    index:
+      fix_assortments: "Закрепление ассортиментов"
+      list_point: "Список торговых точек"
+      product_list: "Список товаров"
+      snhow_all_categories: "Показать все категории"
+      you_have_not_locations: "Вы не добавили в свой список ни одной торговой точки."
+    list:
+      add_new_template: "Добавить новый шаблон"
+      cancel_changes: "Отменить изменения"
+      category: "Категорий"
+      clone_range: "Клонировать ассортимент"
+      delete_template: "Удалить шаблон"
+      point: "Т.Т."
+      save_current_template: "Сохранить текущий шаблон"
+      show_another_assortments: "Для просмотра других ассортиментов необходимо сохранить или отменить сделанные изменения"
+      template_name: "Название шаблона"
+    locations_filter:
+      city: "Город"
+      filter: "Фильтровать"
+      select_area: "Выберите область"
+      select_category: "Выберите компанию"
+      select_format: "Выберите формат"
+      select_type: "Выберите тип"
+      show_all_points: "Показать все точки"
+      signboard: "Вывеска"
+    locations_list:
+      assortment: "Ассортимент"
+  brands:
+    form:
+      required_fields: "Поля, отмеченные знаком *, обязательны для заполнения"
+      save: "Сохранить"
+    new:
+      add_brand: "Добавление бренда"
+  left_menu:
+    ap_exports_menu:
+      export_ap: "Экспорт АП"
+    ap_uploads_menu:
+      download_ap: "Загрузка АП"
+    businesses:
+      businesses: "Бизнесы"
+    calendar_menu:
+      calendar: "Календарь"
+    clone_checkin_types_menu:
+      clone_questionary: "Клонирование анкет"
+    questionaries_menu:
+      questionaries: Опросники
+    dashboard:
+      acknowledgment: "Подтверждения"
+    kpi_templates:
+      kpi_templates: "Шаблоны KPI"
+    lenta_item_menu:
+      feed: "Лента"
+    lenta_xls_downloads_menu:
+      xls_report: XLS отчеты
+    locations_menu:
+      list_point: "Список Т.Т."
+    observe:
+      statistic: "Статистика"
+    organizations:
+      users: "Пользователи"
+    planogram_bundles_menu:
+      set_planograms: "Наборы планограмм"
+    routes_menu:
+      route: "Маршруты"
+    sales:
+      download_kpi: "Загрузка KPI"
+    scorecard_exports_menu:
+      export_scorecard: "Экспорт Scorecard"
+    sku_list_menu:
+      list_sku: "Список SKU"
+    suspicious_apps:
+      suspicious_applications: "Подозрительные приложения"
+    team_menu:
+      command: "Команда"
+      routes_and_calendar: "Маршруты и календарь"
+    uploads_menu:
+      downloads: "Загрузки"
+    location_events:
+      location_events: "События"
+    qlik_menu:
+      statistics: Статистика
+    kpi:
+      kpi_upload: "Загрузка KPI"
+
+  checkins:
+    offline_mode_html: "<strong>Внимание!</strong> Отчет был сделан в оффлайне"
+    informer:
+      address: "Адрес"
+      category_point_type: "Категория и тип Т.Т."
+      hours_report: "Время приема отчета"
+      photoreport: "Фотоотчет"
+      point_id: ID точки
+      questionary: "Анкета"
+      repeated_visit: "Повторный визит (первый визит:"
+      sender_role: "Отправил: %{sender_role}"
+      signboard: "Вывеска"
+      time_begin_work: "Время начала работы"
+      time_displacement: "Время на перемещение"
+      time_displacement_plan_fact: "Время на перемещение (факт/план)"
+      time_end_work: "Время окончания работы"
+      time_point: "Время в точке"
+      time_point_plan_fact: "Время в точке (факт/план)"
+      unscheduled_visit: "Внеплановый визит"
+      paused_at: "Время окончания первого визита"
+      resumed_at: "Время начала повторного визита"
+    no_checkin_type_error:
+      questionary_available: "Анкета недоступна"
+      questionary_deleted: "К сожалению не можем показать результаты, так как анкета была удалена"
+    pretty_photos:
+      loading_photos: "Ожидается догрузка фотографий (%{photos_diff} шт.)"
+      without_question: "Фото входа или фотографии, не связанные с вопросами анкет"
+    show:
+      basic_information: "Основная информация"
+      photo: "Фотографии"
+      report_basic: "%{title} (Отчет по анкете)"
+      report_task: "%{title} (Отчет по заданию)"
+      report_audit: "%{title} (Отчет по аудит анкете)"
+      photo_report: "Фотоотчет"
+      photo_report_taken: "Выполнен фотоотчет"
+  companies:
+    edit:
+      edit_network: "Редактирование торговой сети"
+    form:
+      add_signboard: "Добавить вывеску"
+      save: "Сохранить"
+    index:
+      company: "Компания"
+      founder: "Основатель"
+      list_company: "Список компаний"
+    signboard_fields:
+      delete_signboard: "Удалить вывеску"
+      signboard_name: "Название вывески"
+  confirmations:
+    destroy_form:
+      delete: "Удаление"
+      reason_delete: "Причина удаления"
+      transfer_all_point: "Перенос всех ТТ в сеть"
+      unspecified: "(не указано)"
+  filters:
+    filter:
+      adress_cont_placeholder: "например, Ленинский проспект, 22"
+      checkin_type_locations_checkin_type_id_eq_placeholder: "Выберите опросник"
+      city_cont_placeholder: "Город"
+      clear_filters: "Очистить"
+      client_category_matches_placeholder: "Выберите категорию"
+      company_id_eq_placeholder: "Выберите компанию"
+      country_i_eq_placeholder: "Выберите страну"
+      extended_search: "Расширенный поиск:"
+      external_id_cont_placeholder: "Уникальный ID точки"
+      hide_extended_search: "Скрыть расширенный поиск"
+      iformat_matches_placeholder: "Выберите формат"
+      inspector_locations_merchendising_type_i_eq_placeholder: "Выберите тип"
+      location_category_id_eq_placeholder: "Выберите категорию"
+      location_task_task_id_eq_placeholder: "Выберите задание"
+      location_type_name_i_eq_placeholder: "Выберите тип"
+      planogram_bundle_id_eq_placeholder: "Выберите набор планограмм"
+      search: "Найти"
+      signboard_name_i_eq_placeholder: "Выберите вывеску"
+      checkin_started_at_gteq_placeholder: "Дата от"
+      checkin_started_at_lteqdate_placeholder: "Дата до"
+      state_i_eq_placeholder: "Выберите область"
+      merchendiser_id_eq_placeholder: "Выберите сотрудника"
+      auditor_id_eq_placeholder: "Выберите аудитора"
+  layouts:
+    application:
+      menu_title: "Меню"
+    footer:
+      for_commercial_questions: "Для коммерческих вопросов:"
+      tech: "Служба поддержки:"
+      rights: "© 2017. mstlab24.ru. Все права защищены."
+      now_there_is_week: "Сейчас идет: %{current_week_num} неделя"
+      terms_of_use: "Условия использования"
+    contact_info:
+      organizational_and_commercial_issues: "Для организационных и коммерческих вопросов:"
+      our_info_phone: "+7 (495) 380-14-58"
+      our_info_phone_link: '84953801458'
+      our_support: "Наша служба поддержки:"
+      our_support_phone: 8-800-333-56-07
+      our_support_phone_link: '88003335607'
+    mobile_layout:
+      come_under_a_new_password: "Теперь вы можете зайти в мобильное приложение со своим новым паролем."
+      password_successfully_changed: "Пароль успешно изменен"
+  lenta_items:
+    index:
+      page_title: "Лента"
+    lenta_description:
+      lenta_items_will_appears_here: "Здесь будут отображаться отчеты ваших подчиненных: фотографии полок, оценки мерчендайзинга, время посещения торговых точек."
+      there_are_no_results_report: "Не найдено ни одного отчета, удовлетворяющего заданным параметрам."
+    offline_mode:
+      attention: "Внимание!"
+
+    second_visit:
+      re_visit: "Повторный визит (первый визит: %{time} минут)"
+    show:
+      add_task: "Добавить задачу"
+      added_the_report_point: "добавил(а) отчет по точке"
+      first_visit_start_time: "Начало первого визита - %{time}"
+      second_visit_start_time: "Начало повторного визита - %{time}"
+      visit_start_time: "Начало визита - %{time}"
+      visit_end_time: "Окончание визита - %{time}"
+      time_in_location: "Время, проведенное в точке - %{time}"
+      expected_loading_photos: "Ожидается догрузка фотографий (%{photos_diff} шт.)"
+      rejected_loading_photos: "Загружено некорректных фотографий (%{rejected_photos_diff} шт.)"
+    show_lite:
+      expected_loading_photos: "Ожидается догрузка фотографии"
+      start_report_on_point: "начал(а) отчет по точке"
+      time_of_origin: "Время начала отчета - %{time}"
+    single_category_statistics:
+      availability: "Наличие %{sprintf('%0.01f', 100 * (1 - category['oos_or_crit'] * 1.0/category['overall']))}%"
+      critical_flow: " (OOS/критичный сток - %{category['oos_or_crit']} SKU)"
+      merchandising: "Мерчендайзинг: "
+    task:
+      perform_the_task: "Выполнено задание"
+    unplanned_visit:
+      according_to_plan: "Отчет не по плану"
+  locations:
+    companies_anchors:
+      retail_trade_point: "Розничные Т.Т."
+    filter:
+      filter: "Фильтр по адресу"
+      search: "Поиск по адресу:"
+    form:
+      fields_marked_asterisk_are_required: "Поля, отмеченные знаком *, обязательны для заполнения"
+      find_address_on_the_map: "для сохранения найдите адрес на карте"
+      for_example: "Например: Россия, Красноярский край, Красноярск, улица Ленина, 35"
+      required_fields: "Поля, отмеченные знаком *, обязательны для заполнения"
+      save: "Сохранить"
+      select_category_trade_point: "Выберите категорию Т.Т"
+      select_the_sign: "Выберите вывеску"
+      select_type_trade_point: "Выберите тип Т.Т."
+    header:
+      edit_trade_point: "Редактирование торговой точки"
+    index:
+      list_of_locations: "Список торговых точек"
+      locations: "точек)"
+      search_results: "Результаты поиска:"
+      was_found: "(было найдено"
+    list_title: "Список Т.T."
+    navigation:
+      securing_assortments: "Закрепление ассортиментов"
+      trade_point: "Торговые точки"
+      unassigned_point: "Неназначенные точки"
+    show:
+      category: "Категория:"
+      change_control: "Контроль изменений"
+      company: "Компания:"
+      date_of_creation: "%{@location.location_type.try(:name) || 'не указан'}"
+      edit_range: "Редактировать ассортимент"
+      edit_trade_point: "Редактировать Т.Т."
+      field_inspector_link: "Связь с Field Inspector:"
+      location_category_not_specified: "не указана"
+      location_info_approve_awaiting: "Информация по торговой точке ожидает подтверждения от администратора."
+      location_type_not_specified: "не указан"
+      not_present: "отсутствует"
+      not_specified: "не указано"
+      type: "Тип:"
+      viewing_store: "Просмотр торговой точки"
+    title: "Список торговых точек"
+    unassigned:
+      remove: "Удалить"
+      remove_selection: "Снять выделение"
+      remove_the_point?: "Удалить точки?"
+      select_all: "Выбрать все"
+      unassigned_no_points: "Неназначенных точек нет"
+      unassigned_stores: "Неназначенные точки"
+    visitors_list:
+      no_reports_trade_point: "Нет отчетов по этой торговой точке."
+      report: "Отчет"
+      responsible_for_visiting: "Ответственные за посещение:"
+      subordinate: "Подчиненный"
+  organizations:
+    content_manager_edit_form:
+      "+1_month": "+1 месяц"
+      close: "Закрыть"
+      photoreport: "Фотоотчёт"
+      save: "Сохранить"
+    custom_reportable:
+      'false': "Нет настраиваемой анкеты"
+      'true': "Настраиваемая анкета"
+  photos:
+    form:
+      save: "Сохранить"
+    show:
+      related_items: "Связанный элемент"
+  planogram_bundles:
+    edit:
+      set_planograms: "Набор планограмм"
+    form:
+      add_image: "Добавить еще одно изображение"
+      back_to_set_planograms: "Вернуться к списку наборов планограмм"
+      changes_not_saved: "Изменения не сохранены. Вернуться к списку наборов планограмм?"
+      date_of_creation: "Дата создания: %{date_time}"
+      image_files_planograms: "Файлы изображений планограммы:"
+      only_JPEG_PNG: "Загружать можно только изображения форматов JPEG, PNG"
+      save: "Сохранить"
+      size_10KB_to_1MB: "с разрешением до 10тыс.пикселей по большей стороне и размером 1 файла от 10кб до 1Мб"
+    index:
+      action: "Действия"
+      date_of_creation: "Дата создания"
+      designation: "Название"
+      files_set: "Файлов в наборе"
+      fixing_points: "Закреплено точек"
+      remove: "удалить"
+      review: "просмотр"
+    locations:
+      attach_to_all: "Закрепить за всеми найденными"
+      attach_to_checked: "Закрепить за выбранными"
+      has_no_planogram_bundles: "Не создано ни одного набора планограмм."
+      page_title: "Наборы планограмм"
+    navigation:
+      fixing_sets_planograms: "Закрепление наборов планограмм"
+      sets_planograms: "Наборы планограмм"
+    new:
+      new_set_of_planograms: "Новый набор планограмм"
+    no_option: "Без набора планограмм"
+    planogram_image_fields:
+      delete_a_file: "Удалить файл"
+      delete_this_image?: "Удалить это изображение?"
+      image_name_planograms: "Название изображения планограммы"
+      select_a_file: <i class="icon-upload"></i> Выбрать файл
+      select_an_image_file: "Выберите файл изображения"
+    show:
+      set_planograms: "Набор планограмм"
+  planograms:
+    edit:
+      editing_the_planned_values: "Редактирование плановых значений"
+    form:
+      designation: "Название"
+      not_created_any_questionary: "Не создано ни одного опросника"
+      questionary_not_planned_values: "Ни один вопрос выбранного опросника не нуждается в плановых значениях"
+      save_plan_values: "Сохранить плановые значения"
+      select_questionary: "Выберите опросник"
+    new:
+      editing_the_planned_values: "Редактирование плановых значений"
+  plans:
+    index:
+      action: "Действия"
+      calendar_works: "Календарь работ"
+      date_of_visit: "Дата посещения"
+      points_to_visit: "Точек к посещению"
+      review: "Просмотр"
+    show:
+      ended: "закончился"
+      places_to_visit: "Мест к посещению"
+      term_visit: "Срок посещения"
+  scorecard_exports:
+    header:
+      business: "Бизнес"
+      date_of_discharge: "Дата выгрузки"
+      delete_file: "Удалить файл"
+      file_size: "Размер файла"
+      process_at: "Дата загрузки"
+      remove_upload?: "Удалить эту выгрузку?"
+      status: "Статус"
+      type_of_discharge: "Тип выгрузки"
+    new:
+      context: "Контекст"
+      creation_date: "Дата создания"
+      download: "Скачать"
+      download_export: "Скачать выгрузку"
+      download_list: "Список выгрузок"
+      form_export: "Сформировать выгрузку"
+      plan_type: "Тип планов"
+      export_type: Тип выгрузки
+      information: "Сведения"
+      more_detailed: "Подробнее"
+      period: "Период"
+      processing_date: "Дата обработки"
+      progress: "Прогресс"
+      upload_scorecard: "Выгрузка Scorecard"
+      audit: "Аудит"
+      ordinary: "Обычный"
+    show:
+      error: "Ошибки"
+      error_loading: "Ошибки выгрузки"
+      number: "№"
+      page_title: "Выгрузка %{file_name}"
+  scorecards:
+    table:
+      actual_%_download: "Фактический % загрузки"
+      filter: "Фильтровать"
+      number_worked_days: "Количество отработанных дней"
+      planned: "Плановое"
+      route: "Маршрут"
+      table_scorecard: "Таблица Scorecard"
+      team: "Команда"
+      the_actual: "Фактическое"
+  suspicious_apps:
+    index:
+      delete: "Удалить"
+      save: "Сохранить"
+  uploads:
+    header:
+      delete file: "Удалить файл"
+      download_type: "Тип загрузки"
+      file_size: "Размер файла"
+      remove_download?: "Удалить загрузку?"
+      status: "Статус"
+      upload_date: "Дата создания"
+    index:
+      date: "Дата"
+      download_list: "Список загрузок"
+      download_type: "Тип загрузки"
+      file_name: "Название файла"
+      report_download: "Отчет о загрузке"
+      status: "Статус"
+  users:
+    add_chief_form:
+      add: "Добавить"
+      cancel: "Отмена"
+      phone: "Телефон"
+      sent_invite_number: "На указанный телефон мы отправим приглашение. Сотрудник сам укажет свое имя и фамилию."
+    add_subordinate_form:
+      add: "Добавить"
+      cancel: "Отмена"
+      phone: "Телефон"
+      sent_invite_number: "На указанный телефон мы отправим приглашение. Подчиненный сам укажет свое имя и фамилию."
+    index:
+      delete: "Удалить"
+      deselect: "Снять выделение"
+      enter_more_3_symbols: "Введите не менее 3х символов для поиска"
+      merchandisers_without_destination: "Мерчендайзеры без маршрута"
+      please wait: "Пожалуйста, подождите..."
+      search_by_employees: "Поиск по сотрудникам"
+      select_all: "Выделить всех"
+      team_routes_calendar: "Команда. Маршруты, календарь"
+      to_remove_users: "Удалить пользователей?"
+    routes:
+      route:
+        today_route: Маршрут на сегодня (%{date})
+        tomorrow_route: Маршрут на завтра (%{date})
+    managers:
+      delete: "Удалить"
+    observe:
+      email_team-lead: email тимлида
+      ending_date: "Дата окончания"
+      filter: "Фильтровать"
+      name_team-lead: "имя тимлида"
+      no_new_organizations: "Нет новых организаций за указанный промежуток времени"
+      number_of_users: "количество пользователей"
+      organization: "Организация"
+      registration_date: "Дата регистрации"
+      start_date: "Дата начала"
+      statistics_registered_teams: "Статистика зарегистрированных команд с %{statistics_start} до %{statistics_finish}"
+    reassign_form:
+      cancel: "Отмена"
+      choose_the_curator: "Выберите куратора"
+      reassign: "Переназначить"
+    replace_form:
+      cancel: "Отмена"
+      enter_phone_new_slave: "Введите телефон нового подчиненного"
+      phone: "Телефон"
+      replace: "Заменить"
+    rerole_form:
+      cancel: "Отмена"
+      replace: "Заменить"
+      role: "Роль"
+    set_profile:
+      check_contact: "Пожалуйста, проверьте правильность своих контактных данных."
+      fields_marked_asterisk_are_required: "Поля, отмеченные знаком *, обязательны для заполнения"
+      save: "Сохранить"
+    settings:
+      5_days: 5 дней
+      7_days: 7 дней
+      assigned_from_address_program: "назначается из адресной программы"
+      current_password: "Текущий пароль"
+      full_name: "ФИО"
+      new_password: "Новый пароль"
+      not_specified: "не указан"
+      once_again: "Еще раз"
+      password_change: "Изменение пароля"
+      phone: "Телефон"
+      save: "Сохранить"
+      save_settings_enter_password: "Для сохранения настроек, пожалуйста, введите текущий пароль."
+      settings: "Настройки"
+      time_zone: "Часовой пояс"
+    simple_users_list:
+      add_employee: "Добавить сотрудника"
+    single_user:
+      add_sub: "Добавить подчиненного"
+    calendar:
+      header:
+        number: №
+        name_html: Название ТТ<br />Адрес ТТ
+        category_html: Кате-<br />гория
+        format: "Формат"
+        week: "%{week_num} неделя"
+        mon: "пн"
+        tue: "вт"
+        wed: "ср"
+        thu: "чт"
+        fri: "пт"
+        sat: "сб"
+        sun: "вс"
+        total_visits: Общее количество посещений
+      regions:
+        state_not_specified: регион не указан
+      cities:
+        city_not_specified: город не указан
+      country_not_specified: страна не указана
+      no_assigned_locations: Пользователю не назначены торговые точки для посещения!
+    user_action_buttons:
+      add_employee: "Добавить сотрудника"
+      delete: "Удалить"
+      replace: "Заменить"
+      resubmit: "Отправить повторное"
+      role: "Роль"
+      sms_invitation: sms с приглашением
+      survive: "Перенести"
+  kpi_uploads:
+    index:
+      creation_date: "Дата создания"
+      download: "Скачать"
+      download_KPIs: "Загрузка KPIs"
+      download_list: "Список загрузок"
+      download_type: "Тип загрузки"
+      fact: "Факт"
+      file_name: "Название файла"
+      plan: "План"
+      processing_date: "Дата обработки"
+      progress: "Прогресс"
+      report_download: "Отчет о загрузке"
+      select_file: <i class="icon-upload"></i> Выбрать файл
+      business: "Бизнес"
+    show:
+      error: "Ошибки"
+      error_loading: "Ошибки загрузки"
+      number: "№"
+      row_ID: ID ТТ/Идентификатор строки
+      the_downloaded_file: '<span class="word-break">Загруженный файл '
+    header:
+      business: "Бизнес"
+      confirm_remove_file: "Удалить файл - вы уверены?"
+      file_size: "Размер файла"
+      process_at: "Дата загрузки"
+      remove_file: "Удалить файл"
+      status: "Статус"
+      upload_type: "Тип загрузки"
+  location_events_exports:
+    new:
+      title: "Выгрузка событий"
+  questionaries:
+    index:
+      title: &questionaries Опросники
+      new_questionary: Добавить опросник
+      new_planogram: Новый шаблон плановых значений
+      name: Название
+      type: Тип
+      created_at: Дата создания
+      peroid: Время проведения
+      assigned_locations_count: Закреплено точек
+      actions: Действия
+      delete_questionary_confirm: Удалить опросник?
+      no_questionaries: Нет опросников
+      planned_value_list: 'Шаблоны плановых значений:'
+    tabs:
+      questionaries: *questionaries
+      location_questionaries: "Закрепление опросников"
+    new:
+      title: &questionary_constructor Конструктор опросников
+    edit:
+      title: *questionary_constructor
+      alert: Этот опросник будет сохранен как дубликат.
+    form:
+      please_waiting: 'Пожалуйста, подождите...'
+      questionary_name: Под этим названием будет сохранен ваш опросник
+      add_screen: Добавить шаг (экран)
+      goto_back: Вернуться к списку
+      not_saved: 'Опросник не был сохранен:'
+      save: Сохранить
+      select_matrix: "Выбрать матрицу"
+      question_type: "Тип ответа"
+      sku_has_planogram: "Плановое значение"
+      sku_optional: "Необязательный вопрос"
+      audit_help_block: "Опросник для аудита (для отчётов будет доступен только один опросник для
+        аудита - последний). Назначенные к вопросам KPI не будут сохранены"
+    disabled:
+      info: "В текущем тарифном плане раздел “опросники” отключен. Для подключения функционала конструктора опросников обратитесь в отдел продаж 7(495) 380-14-58"
+  location_questionaries:
+    index:
+      title: "Закрепление опросников"
+      select_questionary: "Выберите опросник"
+      choose_template: "Выберите шаблон плановых значений:"
+      optional: "(необязательно)"
+      attach_to_all: "Закрепить за всеми найденными"
+      attach_to_checked: "Закрепить за всеми выбранными"
+      detach_from_all: Открепить от всех найденных
+      has_no_questionary: "Не создано ни одного опросника"
+      required: "Обязательный опросник"
+  qlik:
+    statistics:
+      show:
+        title: Статистика
+        call_the_support: Информация по статистике не доступна. Обратитесь в тех поддержку

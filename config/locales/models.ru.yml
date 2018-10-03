@@ -1,0 +1,77 @@
+---
+ru:
+  models:
+    address_program:
+      ap_export:
+        select_sheet_export: "Хотя бы один лист должен быть выбран для экспорта"
+      ap_upload:
+        1_week: 1 неделя
+        4_week: 4 недели
+        merchandising: "Мерчендайзинг"
+    businesses:
+      settings:
+        radius_should_fit: "Должен быть в пределах от %{min}м. до %{max}м."
+    checkins:
+      checkin:
+        not_complete_report_before: "Нельзя завершить отчет раньше начала осмотра торговой точки"
+        point_not_match_report: "Торговая точка из плана не совпадает с точкой из отчета"
+      checkin_type:
+        end_date_not_beginning: "Дата окончания не может быть раньше начала"
+      planogram_bundle:
+        fill: "должно быть заполнено"
+        not_less_symbols: "не может быть меньше %{MIN_NOTE_LENGTH} символов"
+        not_more_symbols: "не может быть больше %{MAX_NOTE_LENGTH} символов"
+        specify_another_name: "с таким названием уже существует, задайте другое название"
+      planogram_image:
+        is_required: "обязательно для заполнения"
+        not_less_symbols: "не может быть меньше %{MIN_NOTE_LENGTH} символов"
+        not_more_symbols: "не может быть больше %{MAX_NOTE_LENGTH} символов"
+        permissible_size_10kb_1mb: "допустимый размер от 10кб до 1Мб"
+        select_image: "выберите изображение"
+    companies:
+      company:
+        contain_more_2_symbols: "должно содержать не менее двух символов"
+        network: "Сеть %{self.name}"
+      location:
+        available_signboard: "Вывеска должна быть выбрана из имеющихся у компании этой ТТ"
+        point: "ТТ %{self.full_name}"
+    concerns:
+    deferred_jobs:
+      delete_team:
+        delete_mode:
+          merchendisers: "мерчей"
+          merchendisers_and_supervisors: "мерчей и супервайзеров"
+        not_found: "не найден"
+    location_events:
+      location_problem:
+        agency: "Агентство"
+      order:
+        agency: "Агентство"
+    photo:
+      unsupported_type_file: "тип файла не поддерживается (только jpeg/png/gif изображения)"
+    plans:
+      plan:
+        route: "Маршрут %{inspector.name} на %{thedate.standard_time_view} (%{plan_items.where(:status_id => PlanItem::ACTIVE).count} ТТ)"
+      plan_item:
+        fix_point_plan_today: "Выбранная торговая точка уже запланирована к посещению в этот день"
+        no_add_plan_complete: "Нельзя добавлять точки в план на уже завершенный день"
+        visit: "Посещение на %{self.plan.thedate}"
+    sales_month:
+      total: "ИТОГО"
+    scorecard:
+      scorecard_mart:
+        replaced_merchandiser: "заменен мерчандайзер или нет в АП"
+    users:
+      organization:
+        contain_no_less_symbols: "должно содержать не менее двух символов"
+        free: "Бесплатный: "
+        incorrect_report_type: "Тип отчета указан неверно"
+        paid: "Платный: "
+      settings:
+        radius_should_fit: "Должен быть в пределах от %{min}м. до %{max}м."
+    export:
+      one: Экспорт
+      other: Экспорты
+    photo_export:
+      one: Экспорт фотографий
+      other: Экспорты фотографий
