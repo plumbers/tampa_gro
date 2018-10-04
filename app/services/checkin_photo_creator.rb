@@ -31,7 +31,7 @@ class CheckinPhotoCreator
   end
 
   def queue_upload_to_s3
-    Rails.configuration.aws_uploader.perform_later(@evaluation.photo.id, @evaluation.checkin_id)
+    Rails.configuration.aws_uploader.perform_async(@evaluation.photo.id, @evaluation.checkin_id)
   end
   
   def ensure_checkin_belongs_to_user!

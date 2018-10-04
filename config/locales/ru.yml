@@ -1,0 +1,397 @@
+ru:
+  clientside:
+    checkin_type_clone:
+      success: успешно
+      in_progress: в обработке
+  organizations:
+    custom_reportable:
+      "true": "Настраиваемая анкета"
+      "false": "Нет настраиваемой анкеты"
+  custom_reports:
+    number: Число
+    yesno: Да/Нет
+    percent: "%"
+    price: Цена
+    audit: Аудит
+  schedule_type:
+    week: 1 неделя
+    month: 4 недели
+  sales_file_type:
+    plan: План
+    fact: Факт
+  address_program:
+    schedule_type:
+      week: 1 неделя
+      month: 4 недели
+    organization_type:
+      merch: Мерчендайзинг
+      sales: Sales
+  api:
+    legacy:
+      evaluations:
+        merch_state:
+          best: отлично
+          good: хорошо
+          acceptable: удовлетворительно
+          unacceptable: неудовлетворительно
+          no_info: (неизвестно)
+
+  alerts:
+    resource_editing: Вы собираетесь внести изменения в информацию о торговой %{resource}, доступную другим пользователям. Эти изменения вступят в силу только после подтверждения от администратора.
+    controllers:
+      locations:
+        update:
+          success: Информация о торговой точке обновлена
+          fail: Не удалось обновить информацию о торговой точке
+      companies:
+        update:
+          success: Информация о торговой сети обновлена
+          fail: Не удалось обновить информацию о торговой сети
+        create:
+          success: Сеть успешно создана
+          fail: Сохранение данных не удалось
+      application:
+        api_doc:
+          fail: Версия запрашиваемого API была указана неверно. Отображена версия №3.
+      brands:
+        create:
+          success: Бренд успешно создан
+          fail: Сохранение данных не удалось
+      home:
+        feedback:
+          success: Ваше сообщение отправлено
+      ap_uploads:
+        create:
+          success: Файл принят в обработку.
+        destroy:
+          success: Адресная программа успешно удалена.
+          fail: Удаление АП невозможно
+          job_destroy_fail: Невозможно удалить загрузку АП, возможно она уже в обработке.
+          job_find_fail: Невозможно удалить загрузку АП, загрузка не найдена в очереди.
+      ap_exports:
+        create:
+          success: Началось формирование выгрузки.
+        destroy:
+          success: Выгрузка успешно удалена.
+      messages:
+        create:
+          success: Сообщение отправлено
+      photos:
+        create:
+          success: Фотография успешно добавлена
+          fail: При сохранении фотографии возникла ошибка
+        destroy:
+          success: Фотография удалена
+      plan_items:
+        create:
+          success: Маршрут посещений обновлен
+          fail: Сохранение данных не удалось
+        update:
+          success: Успешно %{action} запланированную точку
+          fail: Сохранение данных не удалось
+      sku_categories:
+        create:
+          success: Категория SKU добавлена #got this one in tests
+        update:
+          success: Данные о категории обновлены
+          fail: Обновление данных не удалось
+      sku_uploads:
+        create:
+          success: Файл принят в обработку. Ход выполнения можно отслеживать на странице загрузок.
+        destroy:
+          success: Загруженный файл удален.
+      skus:
+        create:
+          success: SKU успешно создан
+          fail: Данные не сохранены
+        edit:
+          success: Данные об SKU обновлены
+          fail: Обновление данных не удалось
+      users:
+        add_subordinate:
+          success: Новому сотруднику выслано sms с инструкциями по активации.
+          incorrect_role: Установленная роль некорректна
+          incorrect_timezone: Часовой пояс должен быть установлен для супервайзера
+        add_chief:
+          chief_exist: Сотрудник с таким телефоном не может быть назначен вашим начальником.
+          invitation_sent: Новому сотруднику выслано sms с инструкциями по активации.
+          existed_chief_added: Сотрудник с указанным номером назначен вашим начальником.
+          wrong_phone: Неверный номер телефона
+        destroy_list:
+          success: Пользователи удалены
+        destroy:
+          chief: Начальник удален из орагнизации
+          success: Пользователь удален
+          fail: Нельзя удалить самого себя
+        update:
+          success:
+            users: Данные о пользователе обновлены
+            trade_points: Закрепленные точки обновлены
+          fail: Не удалось обновить информацию о пользователе
+        replace:
+          success: Новому сотруднику выслано sms с инструкциями по активации.
+          fail:
+            regexp_invalid: Неверный номер телефона
+            phone_taken: Этот номер телефона не может быть использован
+        reassign:
+          success: Пользователь направлен в новую команду.
+          fail: Новый куратор был указан неверно. Попробуйте еще раз.
+ 
+  views:
+    devise:
+      registrations:
+        password_length: Придумайте пароль длиной не менее %{length} символов
+    locations:
+      filter:
+        search: Поиск по адресу
+        filter: Фильтр по адресу
+    lenta_downloads:
+      report_types:
+        answers: Заполнение опросника
+        month_report: Месячный табель 
+        general: Общая выгрузка
+        scorecard: выгрузка Scorecard
+        scorecard_milk: выгрузка Scorecard анкета Milk
+        scorecard_plus: выгрузка Scorecard анкета Plus
+        scorecard_magnit: выгрузка Scorecard анкета Magnit
+        scorecard_water: выгрузка Scorecard анкета Water
+
+  ransack:
+    locations: 
+      country_eq: Страна
+      location_category_id_eq: Категория
+      state_eq: Область (Край)
+      location_type_id_eq: Тип
+      city_eq: Город
+      company_id_eq: Название компании
+      iformat_eq: Внутренний формат
+      merchendising_type_eq: Тип мерчендайзинга
+      client_category_eq: Категория клиента
+      external_id: ID точки
+      signboard_id: Вывеска
+      checkin_type_id: Анкета
+      task_id: Задание
+      planogram_bundle_id: Набор планограмм
+
+    signboards:
+      name_eq: Вывеска
+    checkins:
+      user_id_eq: Сотрудник
+  roles:
+    merchendiser: мерчендайзер
+    merch: мерчендайзер
+    supervisor: супервайзер
+    sv: супервайзер
+    chief: начальник
+    teamlead: тимлид
+    trade_person: "торговый представитель"
+    regional_manager: "региональный менеджер"
+    manager: менеджер
+    executive: "директор по мерчендайзингу"
+    director: директор по развитию бизнеса
+    head_manager: вице-президент
+    ceo: генеральный директор
+    president: президент
+    confirmer: Администратор
+    content_manager: Администратор
+  for_points:
+    one: 'точки'
+    few: 'точек'
+    many: 'точек'
+    other: 'точек'
+  forms:
+    search_label: 'Поиск'
+  evaluations:
+    merch_state:
+      best: отлично
+      good: хорошо
+      acceptable: удовлетворительно
+      unacceptable: неудовлетворительно
+      no_info: (неизвестно)
+    price_tags:
+      fresh: Ценники свежие
+      not_fresh: Ценники несвежие
+      no_info: Нет информации о ценниках
+  activerecord:
+    models:
+      location:
+         one: Торговая точка
+         other: Торговые точки
+      planogram_bundle:
+         one: Набор планограмм
+         other: Наборы планограмм
+      planogram_image:
+         one: Изображение планограммы
+         other: Изображения планограмм
+    attributes:
+      suspicious_app:
+        name: Название
+      checkin_type:
+        name: Название анкеты
+        schema: Структура анкеты
+      audit_template:
+        name: Название маршрута
+      plan_item:
+        transfer_date: День переноса
+      user:
+        route_id: Номер маршрута
+        password: Пароль
+        phone: Телефон
+        email: Электронная почта
+        email_or_phone: Телефон или e-mail
+        mobile_phone: Телефон
+        remember_me: запомнить меня
+        name: Имя и фамилия
+        password_confirmation: Подтверждение пароля
+        team_size: Количество людей в команде
+        reset_password_token: Ссылка для восстановления пароля
+        personal_agreement: Согласие на обработку персональных данных
+      company:
+        name: Название торговой сети
+        to_destroy: Удалить торговую сеть?
+        reason: Причина удаления
+        migrate_locations_to: Перенести все ТТ в другую сеть
+      brand:
+        name: Название
+      location:
+        name: Название торговой точки
+        address: Адрес
+        country: Страна
+        city: Город
+        state: Область/край
+        inspector_ids: Ответственные за посещение
+        inspector_locations: Ответственный за посещение
+        company_id: Сеть/компания
+        company_name: Сеть/компания
+        signboard_id: Вывеска
+        location_category_id: Категория торговой точки
+        location_type_id: Тип торговой точки
+        to_destroy: Удалить торговую точку?
+        reason: Причина удаления
+        coordinates: Координаты
+        filter:
+          show_all_or_own: Отображать точки
+          all: Все точки
+          own: Только свои точки
+        data:
+          iformat: Внутренний формат
+          region:  Регион
+          channel: Канал
+          id_cat1: ID категории 1
+          id_cat2: ID категории 2
+          id_cat3: ID категории 3
+          id_cat4: ID категории 4
+          territory: Территория
+          agency_name: Наименование агенства
+          inner_tt_id: Внешний ID ТТ
+          network_name: Название сети
+          signboard_name: Вывеска
+          territory_type: Тип территории
+          client_category: Категория клиента
+          merchendising_type: Тип мерчендайзинга
+      scorecard_job:
+        scorecard_top: Топ Scorecard
+        scorecard_date: Дата Scorecard
+      scorecard_export:
+        requester_id: Пользователь
+        start_date: Начало периода
+        end_date: Окончание периода
+      plan_item:
+        location_id: Торговая точка
+        plan_id: План
+      planogram:
+        name: Название
+      signboard:
+        name: Название
+      upload:
+        file_content_type: Тип файла
+      sku_upload:
+        file: Файл
+      photo:
+        image: Фотография
+      promo:
+        location_id: ТТ
+      organization:
+        name: Название компании
+        website: Сайт компании
+        slavery_mode: Продолжительность рабочей недели
+        slavery_mode?: Продолжительность рабочей недели
+      sku:
+        location_id: ТТ
+        name: Наименование
+        article_code: Артикул
+        bar_code: Штрих-код
+        box_count: Количество
+        sku_category_id: Категория товара
+        brand_id: Бренд
+        manufacturer_id: Производитель
+      sku_category:
+        name: Категория товара
+      sku_sku_category:
+        sku_category_id: Категория товара
+        sku_category: Категория товара
+        sku_id: SKU
+      checkin:
+        started_at: Время начала отчета
+        finished_at: Время завершения отчета
+        started_date: Дата начала отчета
+        mobile_expected_photos_count: Количество сделанных фотографий
+      customer_feedback:
+        name: Ваше имя
+        email: E-mail
+        text: Текст сообщения
+      inspector_location:
+        inspector_id: Связь мерчендайзер <-> ТТ
+      sales_upload:
+        group_id: Группа
+        region: Регион
+        file_type: Тип загрузки
+        process_at: Время обработки
+      planogram_bundle:
+        note: Название набора планограмм
+      planogram_bundle/planogram_images:
+        note: Название изображения планограммы
+        file: Файл изображения планограммы
+        file_file_name: Название файла планограммы
+        file_file_size: Размер файла планограммы
+        file_file_content_type: Тип файла изображения планограммы - jpeg или png
+      planogram_image:
+        note: Название изображения планограммы
+        file: Файл изображения планограммы
+        file_file_name: Название файла планограммы
+        file_file_size: Размер файла планограммы
+        file_file_content_type: Тип файла изображения планограммы - jpeg или png
+      planogram_bundle/planogram_images.file: Файл изображения планограммы
+    errors:
+      messages:
+        confirmation: и %{attribute} не совпадают
+        planogram_bundle:
+          planogram_image:
+            missed_file: ' - должен быть прикреплен хотя бы 1 файл'
+      models:
+        location:
+          attributes:
+            coordinates:
+              critical_change: "- попытка изменить значение с «%{old_value}» на «%{value}»"
+            address:
+              critical_change: "- попытка изменить значение с «%{old_value}» на «%{value}»"
+              not_found: «%{address}» не найден
+              not_precisious:  «%{address}» не однозначен
+            signboard_id:
+              critical_change: "- попытка изменить значение"
+            company_id:
+              critical_change: "- попытка изменить значение"
+        inspector_location:
+          attributes:
+            inspector_id:
+              taken: "уже существует, где телефон мерчендайзера «%{inspector_mobile_phone_value}», внешний ID ТТ «%{location_external_id_value}», адрес ТТ «%{location_address_value}»"
+        user:
+          attributes:
+            mobile_phone:
+              taken: "«%{value}» уже существует"
+            route_id:
+              taken: "«%{value}» уже существует в рамках типа организации «%{org_type}», группы «%{group_id}»"
+        sku_upload:
+          attributes:
+            file_content_type:
+              invalid: не поддерживается (только xls таблицы)

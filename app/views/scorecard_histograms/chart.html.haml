@@ -1,0 +1,58 @@
+= javascript_include_tag 'd3.v3'
+= javascript_include_tag 'nv.d3'
+= javascript_include_tag 'scorecard_histograms_bullet'
+
+= content_for(:page_title){ 'Гистограмма scorecard' }
+
+#scorecard-histogram
+  %section#form
+    = simple_form_for :histogram, url: chart_scorecard_histograms_path, method: :get do |f|
+
+      .search_form_block
+        .row
+          .col-md-12
+            .col-md-4
+              .is-wide
+                = f.input :begin_date, label: 'Начало периода', as: :date_picker, required: false, value: (params[:histogram][:begin_date] rescue nil)
+            .col-md-4
+              .is-wide
+                = f.input :end_date, label: 'Окончание периода', as: :date_picker, required: false, value: (params[:histogram][:end_date] rescue nil)
+
+        .row{style: 'margin-top:5px;'}
+          .col-md-12
+            .col-md-10.strong
+              = 'Фильтр анализируемого среза'
+              #histogram_legend_serie
+            .col-md-4
+              .is-wide
+                -#- cache ['subordinate_users', 'users', current_user, Date.yesterday] do
+                = f.input :requester, label: 'Орг.структура', as: :select, collection: @users, required: false, :include_blank => 'Выберите подчиненного', selected: (params[:histogram][:requester] rescue nil), input_html: { class: 'chosen-select form-control', style: 'width:100%;'}
+            - ScorecardHistogramsController::FILTER_FIELDS.each do |column|
+              .col-md-4
+                .is-wide
+                  = f.input :"#{column}", label: t("activerecord.attributes.location.data.#{column}"), required: false, as: :select, collection: @filter_items[column], selected: (params[:histogram][:"#{column}"] rescue nil), :include_blank => "Выберите #{t("activerecord.attributes.location.data.#{column}").downcase}",  input_html: {class: 'chosen-select form-control', style: 'width:100%;'}
+
+        .row{style: 'margin-top:5px;'}
+          .col-md-12
+            .col-md-10.strong
+              = 'Фильтр средней линии'
+              #histogram_legend_serie_base
+            .col-md-4
+              .is-wide
+                -#- cache ['base_subordinate_users', 'users', current_user, Date.yesterday] do
+                = f.input :requester_base, label: 'Орг.структура', as: :select, collection: @users, required: false, :include_blank => 'Выберите подчиненного', selected: (params[:histogram][:requester_base] rescue nil), input_html: { class: 'chosen-select form-control', style: 'width:100%;'}
+            - ScorecardHistogramsController::FILTER_FIELDS.each do |column|
+              .col-md-4
+                .is-wide
+                  = f.input :"#{column}_base", label: t("activerecord.attributes.location.data.#{column}"), required: false, as: :select, collection: @filter_items[column], selected: (params[:histogram][:"#{column}_base"] rescue nil), :include_blank => "Выберите #{t("activerecord.attributes.location.data.#{column}").downcase}", input_html: {class: 'chosen-select form-control', style: 'width:100%;'}
+
+
+      = f.submit 'Фильтровать', class: 'btn btn-success'
+
+  - if @data.count > 0
+    #chart
+      = render 'chart_block', data: @data
+  - else
+    По заданным условиям ничего не найдено.
+
+  = render 'paginator', items: @items

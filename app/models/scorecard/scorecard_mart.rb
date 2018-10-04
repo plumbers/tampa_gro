@@ -74,7 +74,7 @@ class ScorecardMart < ActiveRecord::Base
     end
 
     def recreate_data_marts_tables
-      # ScorecardMart.recreate_data_marts_tables
+      # ScorecardMart.full_update_cached_stats
       StatisticsUpdateLog.add_step 're-create (empty) stats views && tables'
       time_split = Time.now
       etl  = ETL.new(description: "this ETL prepare DB = {DDL && data} for scorecard reports",

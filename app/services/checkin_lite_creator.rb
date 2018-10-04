@@ -23,8 +23,7 @@ class CheckinLiteCreator
   private
   def queue_upload_to_s3
     if @checkin.photo
-      uploader = Rails.configuration.aws_uploader
-      uploader.perform_later(self.photo.id, nil)
+      Rails.configuration.aws_uploader.perform_aync(self.photo.id, nil)
     end
   end
 

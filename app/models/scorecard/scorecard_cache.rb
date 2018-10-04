@@ -12,6 +12,8 @@ class ScorecardCache < ActiveRecord::Base
   validates :event_local_date, presence: true
 
   scope :with_errors, ->{ self.where(:event_error.not_eq => nil) }
+  scope :only_new_cache,    ->{ where("scorecard_caches.id > (SELECT COALESCE(MAX(edge_id),0) FROM scorecard_histogram)") }
+  scope :requester,       ->(user_id){ where("h_vector @> '?'", user_id) }
 
   def set_state
     self.state = :approved unless self.state

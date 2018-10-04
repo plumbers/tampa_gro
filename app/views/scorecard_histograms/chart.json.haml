@@ -1,0 +1,7 @@
+$('#chart').append('#{j render 'chart_block', data: @data}');
+- if @questions.next_page
+  $('.pagination').replaceWith("#{j render 'chart_block', data: @data}");
+- else
+  $(window).off('scroll');
+  $('.pagination').fadeIn("slow");
+  $('.pagination').remove();

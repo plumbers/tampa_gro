@@ -383,6 +383,10 @@ class User < ActiveRecord::Base
     self.self_and_ancestors.pluck(:scorecard_top).any?
   end
 
+  def self.options_for_select
+    order('LOWER(name)').map { |e| [e.name, e.id] }
+  end
+
   private
 
   def supervisor_is_supervisor

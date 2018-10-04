@@ -9,12 +9,9 @@ class ScorecardAutogenerate < Scheduler::SchedulerTask
     Rails.logger.info "Found #{scorecard_tops.count} scorecard users, processing.."
     scorecard_tops.each do |user|
       job = ScorecardJob.create! scorecard_top_id: user.id, scorecard_date: Date.yesterday
-      jid = ScorecardGeneratorJob.perform_later(job.id).job_id
+      jid = ScorecardGeneratorWorker.perform_async(job.id)
       job.update! jid: jid
     end
-  rescue => e
-    Rails.logger.info e
-    Rollbar.error(e)
   end
 
 end
